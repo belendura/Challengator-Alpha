@@ -2,16 +2,13 @@ import React from "react";
 
 import './user-info.styles.scss';
 
-const UserInfo= ()=>(
+const UserInfo= ({currentUser:{displayName, photo, belt, rating, countdown}})=>(
     <div className="user-info-container">
-       <div className="photo container">
-            <img src={image} alt="user-photo"/>
-       </div>
-       <div classname="rating">RATING</div>
-       <div classname="countdown">COUNTDOWN</div>
-       <div classname="belt-container">
-            <img src={image} alt="belt"/>  
-       </div>   
+          <img src={photo} alt="photo" className="photo"/>
+          <span className="rating">{displayName}</span>
+          <span className="rating">{rating}</span>
+          <span className="countdown">{countdown}</span>
+          <img src={belt} alt="belt" className="belt"/>   
     </div>  
 )
 

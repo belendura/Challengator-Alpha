@@ -1,17 +1,35 @@
 import React from 'react';
 import {Route, Switch, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+
+import HomePage from "./pages/homepage/homepage.component";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 import Header from "./components/header/header.component";
 
-import './App.css';
+import {selectCurrentUser} from "./redux/user/user.selectors";
 
-function App() {
+import {GlobalStyle} from "./global.styles";
+
+function App({currentUser}) {
   return (
-    <div className="App">
-      <Header/>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+    <div>
+     <GlobalStyle/>
+        <Header/>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/signin" 
+          render={()=> currentUser? 
+          <Redirect to="/"/>
+          : <SignInAndSignUpPage/>}/>
+        </Switch>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+})
+
+export default connect(mapStateToProps)(App);

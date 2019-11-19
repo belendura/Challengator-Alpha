@@ -5,6 +5,9 @@
     justify-content: space-between;
     align-items:center;
     margin-bottom: 25px;
+    background: linear-gradient(to bottom, rgba(241,226,202,1) 0%, rgba(189,157,107,0.95) 46%, rgba(178,141,83,0.94) 62%, rgba(231,212,182,0.9) 100%);
+    border-bottom: rgb(97, 76, 31) 1px;
+    border-radius: 6px;
   
     .logo {
       height: 100%;
@@ -13,15 +16,28 @@
     }
   
     .miscelaneous-container {
-      width: 50%;
+      width: 30%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
   
-      .create-challenge, .signIn, .user {
+      .create-challenge, .signIn, .signOut{
         padding: 10px 15px;
         cursor:pointer;
+      }
+    }
+
+    .user-info-container {
+      width: 30%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .user-info{
+        padding: 10px 15px;
+       
       }
     
     }

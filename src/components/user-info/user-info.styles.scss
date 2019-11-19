@@ -1,0 +1,20 @@
+.user-info-container {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    //margin: 25px;
+  
+    .photo, .belt {
+      height: 100%;
+      width: 30px;
+      padding: 25px;
+    }
+   
+    .rating, .countdown {
+        padding: 10px 15px;
+    }
+    
+  }
+  
