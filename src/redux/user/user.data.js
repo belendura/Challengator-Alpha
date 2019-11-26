@@ -6,7 +6,7 @@ export const users=[
         rating:100,
         photo: "\assets\Belen.jpg",
         belt:"\assets\Cinturon.jpg",
-        countdown: 30
+        countdown: 30,
     },
     {
         displayName:"Raul",
@@ -15,7 +15,7 @@ export const users=[
         rating:200,
         photo: null,
         belt:null,
-        countdown: 30
+        countdown: 30,
     },
     {
         displayName:"Angie",
@@ -24,7 +24,7 @@ export const users=[
         rating:300,
         photo: null,
         belt:null,
-        countdown: 30
+        countdown: 30,
     },
     {
         displayName:"Silo",
@@ -33,8 +33,7 @@ export const users=[
         rating:50,
         photo: null,
         belt:null,
-        countdown: 30
-    }
-    
+        countdown: 30.
+    }   
     
 ];

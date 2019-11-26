@@ -28,7 +28,6 @@ const Header= ({currentUser, signOutStart})=>{
             }
         </div>
         <div className="miscelaneous-container">
-            <Link className="create-challenge" to="/create">CREATE CHALLENGE</Link>
             {
             currentUser?
             <div className="signOut" onClick={signOutStart}>SIGN OUT</div>:

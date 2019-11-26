@@ -1,0 +1,16 @@
+.scroll {
+    overflow-x: scroll;
+    margin:10px;
+}
+
+.scroll::-webkit-scrollbar {
+        width: 30px;
+      }
+
+.scroll::-webkit-scrollbar-track {
+        background: #6c706c;
+      }
+      
+.scroll::-webkit-scrollbar-thumb {
+        background: rgb(161, 159, 159);
+      }
