@@ -7,7 +7,7 @@ import "./category.styles.scss";
 
 const Category =({title, setCategoryOverview})=>(
 
-    <div className= "category-container"
+    <div className= "category"
     onClick={()=>setCategoryOverview(title)}>
     <div className="title"> {title} </div>
     </div>

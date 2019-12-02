@@ -2,9 +2,9 @@ import React from "react";
 
 import "./scroll.styles.scss";
 
-const Scroll = (props)=>(
-            <div className="scroll">
-                {props.children}
+const Scroll = ({children, horizontal, vertical, ...otherProps})=>(
+            <div className={ `${vertical ? "vertical" : ""} ${horizontal ? "horizontal" : ""} scroll`}{...otherProps}>
+                {children}
             </div>            
 )
 

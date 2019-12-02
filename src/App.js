@@ -19,7 +19,7 @@ function App({currentUser}) {
         <Header/>
         <Switch>
           <Route exact path="/" component={HomePage}/>
-          <Route exact path="/signin" 
+          <Route exact path="/signIn" 
           render={()=> currentUser? 
           <Redirect to="/"/>
           : <SignInAndSignUpPage/>}/>

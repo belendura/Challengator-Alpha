@@ -4,14 +4,16 @@ export const HomePageContainer = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
  
 `
 export const CategoryMenuContainer = styled.div`
 
+    {/* width:85vh; */}
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 20px 80px; 
+    padding: 20px 40px; 
     margin-bottom:30px;
+
 `

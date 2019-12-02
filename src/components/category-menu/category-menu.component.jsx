@@ -11,7 +11,7 @@ import "./category-menu.styles.scss";
 const CategoryMenu= ({categoriesTitle})=> {
     
     return(
-    <div className="category-menu-container">
+    <div className="category-menu">
     {categoriesTitle.map((title) => 
     <Category key={title} title={title}/>)}
     </div>

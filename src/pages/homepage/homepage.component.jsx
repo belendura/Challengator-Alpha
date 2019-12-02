@@ -13,12 +13,14 @@ return(
     <HomePageContainer>
         <CategoryMenuContainer>
         <CustomButton onClick={()=> document.querySelector(".scroll").scrollLeft +=20}>SLIDE LEFT</CustomButton>
-        <Scroll className="scroll">
+        <Scroll horizontal>
             <CategoryMenu/>
         </Scroll> 
         <CustomButton onClick={()=> document.querySelector(".scroll").scrollLeft -=20}>SLIDE RIGHT</CustomButton>
         </CategoryMenuContainer>
+        <Scroll vertical>
         <Overview/> 
+        </Scroll> 
     </HomePageContainer>
     </div>
 )
