@@ -1,26 +1,17 @@
 import React from "react";
-import {connect} from "react-redux";
-
-import {createStructuredSelector} from "reselect";
-import {selectDirectoryCategoriesTitle} from "../../redux/directory/directory.selectors";
 
 import Category from "../category/category.component";
 
-import "./category-menu.styles.scss";
+import { CategoryMenuContainer } from "./category-menu.styles.jsx";
 
-const CategoryMenu= ({categoriesTitle})=> {
-    
-    return(
-    <div className="category-menu">
-    {categoriesTitle.map((title) => 
-    <Category key={title} title={title}/>)}
-    </div>
+const CategoryMenu = ({ categoriesTitle }) => {
+  return (
+    <CategoryMenuContainer>
+      {categoriesTitle.map(title => (
+        <Category key={title} title={title} />
+      ))}
+    </CategoryMenuContainer>
+  );
+};
 
-)
-}
-
-const mapStateToProps = createStructuredSelector({
-    categoriesTitle: selectDirectoryCategoriesTitle,
-  });
-  
-  export default connect(mapStateToProps)(CategoryMenu);
+export default CategoryMenu;

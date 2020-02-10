@@ -21,11 +21,21 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-  
-      .create-challenge, .signIn, .signOut{
-        padding: 10px 15px;
-        cursor:pointer;
-      }
+
+        .signed{
+        display: flex;
+        flex-direction: row;
+
+          .signOut, .user{
+            padding: 10px 15px;
+            cursor:pointer;
+          }
+        }
+        .signIn{
+          padding: 10px 15px;
+          cursor:pointer;
+        } 
+      
     }
 
     .user-info-container {

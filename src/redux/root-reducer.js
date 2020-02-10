@@ -1,15 +1,17 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 
 import userReducer from "./user/user.reducer";
-import directoryReducer from "./directory/directory.reducer";
-import categoriesReducer from "./categories/categories.reducer";
-import challengeReducer from "./challenge/challenge.reducer";
+import usersReducer from "./users/users.reducer";
+import challengesInstancesReducer from "./challengesInstances/challengesInstances.reducer";
+import challengesTemplatesReducer from "./challengesTemplates/challengesTemplates.reducer";
+import modalReducer from "./modal/modal.reducer";
 
-const rootReducer=combineReducers({
-    user: userReducer,
-    directory: directoryReducer,
-    categories: categoriesReducer,
-    challenge: challengeReducer,
+const rootReducer = combineReducers({
+  user: userReducer,
+  users: usersReducer,
+  challengesTemplates: challengesTemplatesReducer,
+  challengesInstances: challengesInstancesReducer,
+  modal: modalReducer
 });
 
 export default rootReducer;

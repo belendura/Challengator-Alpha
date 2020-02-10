@@ -1,15 +1,16 @@
 import React from "react";
 
-import './user-info.styles.scss';
+import {
+  UserInfoContainer,
+  UserPicturesContainer,
+  UserDataContainer
+} from "./user-info.styles.jsx";
 
-const UserInfo= ({currentUser:{displayName, photo, belt, rating, countdown}})=>(
-    <div className="user-info-container">
-          <img src={photo} alt="photo" className="photo"/>
-          <span className="rating">{displayName}</span>
-          <span className="rating">{rating}</span>
-          <span className="countdown">{countdown}</span>
-          <img src={belt} alt="belt" className="belt"/>   
-    </div>  
-)
+const UserInfo = ({ currentUser }) => (
+  <UserInfoContainer>
+    <UserDataContainer>{currentUser.userData.displayName}</UserDataContainer>
+    <UserDataContainer>{currentUser.statistics.ranking}</UserDataContainer>
+  </UserInfoContainer>
+);
 
 export default UserInfo;

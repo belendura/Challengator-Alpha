@@ -1,20 +1,17 @@
 import React from "react";
-import {connect} from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {setCategoryOverview} from "../../redux/categories/categories.actions";
+import { setCategoryOverview } from "../../redux/challengesTemplates/challengesTemplates.actions";
 
-import "./category.styles.scss";
+import { CategoryContainer, CategoryTitle } from "./category.styles.jsx";
 
-const Category =({title, setCategoryOverview})=>(
+const Category = ({ title }) => {
+  const dispatch = useDispatch();
+  return (
+    <CategoryContainer onClick={() => dispatch(setCategoryOverview(title))}>
+      <CategoryTitle> {title} </CategoryTitle>
+    </CategoryContainer>
+  );
+};
 
-    <div className= "category"
-    onClick={()=>setCategoryOverview(title)}>
-    <div className="title"> {title} </div>
-    </div>
-)
-
-const mapDispatchToProps= dispatch =>({
-    setCategoryOverview: title => dispatch(setCategoryOverview(title)),
-    })
-    
-export default connect(null, mapDispatchToProps)(Category);
+export default Category;

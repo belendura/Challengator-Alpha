@@ -1,0 +1,11 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .challenge-instance,
+  .pending-challenges,
+  .completed-challenges {
+    padding: 10px;
+  }
+}

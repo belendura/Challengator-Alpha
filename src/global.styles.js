@@ -1,6 +1,6 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle= createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 body{
     font-family: 'Open Sans Condensed', sans-serif;
     padding:20px 60px;
@@ -13,6 +13,11 @@ body{
 a{
     text-decoration: none;
     color:black;
+}
+
+#modal {
+  position: relative;
+  z-index: 999;
 }
 
 /**{

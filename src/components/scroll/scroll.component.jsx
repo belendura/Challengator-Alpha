@@ -1,11 +1,9 @@
 import React from "react";
 
-import "./scroll.styles.scss";
+import { ScrollContainer } from "./scroll.styles.jsx";
 
-const Scroll = ({children, horizontal, vertical, ...otherProps})=>(
-            <div className={ `${vertical ? "vertical" : ""} ${horizontal ? "horizontal" : ""} scroll`}{...otherProps}>
-                {children}
-            </div>            
-)
+const Scroll = ({ children, ...props }) => (
+  <ScrollContainer {...props}>{children}</ScrollContainer>
+);
 
 export default Scroll;

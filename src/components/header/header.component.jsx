@@ -1,49 +1,53 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {connect} from "react-redux";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
-import {createStructuredSelector} from "reselect";
-import{selectCurrentUser} from "../../redux/user/user.selectors";
-import {signOutStart} from "../../redux/user/user.utils"
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
-import {ReactComponent as Logo} from "../../assets/logo.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 import UserInfo from "../user-info/user-info.component";
 
-import './header.styles.scss';
+import { signOutStart } from "../../redux/user/user.actions";
 
-const Header= ({currentUser, signOutStart})=>{
-    
-    return(
-    <div className="header">
-        <Link to="/">
-         <Logo className="logo"/>
-        </Link>
-        <div className="user-info-container">
-            {
-            currentUser? 
-            <UserInfo className="user-info" currentUser={currentUser}/> 
-            :null
-            }
-        </div>
-        <div className="miscelaneous-container">
-            {
-            currentUser?
-            <div className="signOut" onClick={signOutStart}>SIGN OUT</div>:
-            <Link className="signIn" to="/signIn">SIGN IN / REGISTER</Link>
-            }
-        </div>
-    </div>
-)
-}
+import {
+  HeaderContainer,
+  MiscelaneousContainer,
+  LogoContainer,
+  Signed,
+  SignOut,
+  User,
+  SignIn
+} from "./header.styles.jsx";
 
-const mapStateToProps = createStructuredSelector({
-        currentUser: selectCurrentUser,
-})
+const Header = () => {
+  const currentUser = useSelector(selectCurrentUser, shallowEqual);
 
-const mapDispatchToProps = dispatch =>({
-    signOutStart: currentUser => dispatch(signOutStart(currentUser)),
-})
+  const dispatch = useDispatch();
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+  return (
+    <HeaderContainer>
+      <Link to="/">
+        <Logo className="logo" />
+      </Link>
+      <LogoContainer>
+        {currentUser ? (
+          <UserInfo className="user-info" currentUser={currentUser} />
+        ) : null}
+      </LogoContainer>
+      <MiscelaneousContainer>
+        {currentUser ? (
+          <Signed>
+            <User to="/user">USER</User>
+            <SignOut onClick={() => dispatch(signOutStart())}>SIGN OUT</SignOut>
+          </Signed>
+        ) : (
+          <SignIn to="/signIn">SIGN IN / REGISTER</SignIn>
+        )}
+      </MiscelaneousContainer>
+    </HeaderContainer>
+  );
+};
+
+export default Header;
