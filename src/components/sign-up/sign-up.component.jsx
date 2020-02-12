@@ -8,7 +8,7 @@ import {
   SignUpContainer,
   TitleContainer,
   GenderContainer,
-  Gender,
+  Text,
   CountryContainer
 } from "./sign-up.styles.jsx";
 
@@ -59,7 +59,7 @@ const SignUp = () => {
     <SignUpContainer>
       <TitleContainer>I do not have an account</TitleContainer>
       <span>Sign up with your email and password</span>
-      <form className="sign-up-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <FormInput
           type="text"
           name="displayName"
@@ -77,9 +77,8 @@ const SignUp = () => {
           required
         />
         <GenderContainer>
-          <label>Sex</label>
+          <Text>Sex</Text>
           <FormInput
-            className="gender"
             type="radio"
             name="gender"
             value="Other"
@@ -89,7 +88,6 @@ const SignUp = () => {
             checked
           />
           <FormInput
-            className="gender"
             type="radio"
             name="gender"
             value="Male"
@@ -98,7 +96,6 @@ const SignUp = () => {
             required
           />
           <FormInput
-            className="gender"
             type="radio"
             name="gender"
             value="Female"
@@ -108,9 +105,9 @@ const SignUp = () => {
           />
         </GenderContainer>
 
-        <div className="country-container">
-          <label>Country</label>
-          <select id="country" name="country" onChange={handleChange}>
+        <CountryContainer>
+          <Text>Country</Text>
+          <select id="country" name="country" onChange={handleChange} size="7">
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
             <option value="Algeria">Algeria</option>
@@ -368,7 +365,7 @@ const SignUp = () => {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
           </select>
-        </div>
+        </CountryContainer>
         <FormInput
           type="email"
           name="email"

@@ -10,15 +10,19 @@ export const TitleContainer = styled.h2`
   margin: 10px 0;
 `;
 
+export const Text = styled.label`
+  color: grey;
+`;
+
 export const GenderContainer = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-export const Gender = styled.div`
-  margin: 0px 30px;
+  justify-content: space-between;
+  margin-right: 40px;
 `;
 
 export const CountryContainer = styled.div`
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;

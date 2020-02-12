@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
-import { checkPropTypes } from "prop-types";
 
 const HorizontalStyles = css`
   overflow-x: scroll;
+  width: 70vw;
 `;
+
 const VerticalStyles = css`
   overflow-y: scroll;
-  height: 500px;
+  height: 90vh;
 `;
 
 const getScrollStyles = props => {

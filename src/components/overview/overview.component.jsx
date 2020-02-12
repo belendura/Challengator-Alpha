@@ -6,7 +6,7 @@ import {
   selectCurrentCategory
 } from "../../redux/challengesTemplates/challengesTemplates.selectors";
 
-import ChallengeItem from "../../components/challenge-item/challenge-item.component";
+import ChallengePreview from "../../components/challenge-preview/challenge-preview.component";
 
 import { OverviewContainer, ItemContainer } from "./overview.styles.jsx";
 
@@ -24,7 +24,7 @@ const Overview = () => {
     <OverviewContainer>
       <ItemContainer>
         {selectedChallenges.map((item, itemIndex) => {
-          return <ChallengeItem key={itemIndex} item={item} />;
+          return <ChallengePreview key={itemIndex} item={item} />;
         })}
       </ItemContainer>
     </OverviewContainer>

@@ -16,9 +16,9 @@ import {
   Description,
   Footer,
   Visualizations
-} from "./challenge-item.styles.jsx";
+} from "./challenge-preview.styles.jsx";
 
-const ChallengeItem = ({ item }) => {
+const ChallengePreview = ({ item }) => {
   const { name, url, description, visualizations, difficulty } = item;
   const dispatch = useDispatch();
   let history = useHistory();
@@ -39,19 +39,18 @@ const ChallengeItem = ({ item }) => {
         <Description>{description}</Description>
         <Footer>
           <Visualizations>{visualizations} visualitzations</Visualizations>
-         {/* <span className="difficulty">Difficulty: {difficulty}</span>*/}
         </Footer>
         <CustomButton
           onClick={() => {
-            currentUser ? history.push("/user") : history.push("/signIn");
+            currentUser ? history.push("/challenge") : history.push("/signIn");
             dispatch(acceptChallenge(item));
           }}
         >
-          Accept Challenge
+          VIEW CHALLENGE
         </CustomButton>
       </ChallengeDetails>
     </ChallengeContainer>
   );
 };
 
-export default ChallengeItem;
+export default ChallengePreview;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 
 import { fetchChallengesTemplateStart } from "../../redux/challengesTemplates/challengesTemplates.actions";
@@ -19,6 +19,7 @@ import { HomePageContainer, CategoryMenuContainer } from "./homepage.styles";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchChallengesTemplateStart());
@@ -38,19 +39,15 @@ const HomePage = () => {
     <div>
       <HomePageContainer>
         <CategoryMenuContainer>
-          <CustomButton
-            onClick={() => (document.querySelector(".scroll").scrollLeft += 20)}
-          >
+          <CustomButton onClick={() => (scrollRef.current.scrollLeft += 20)}>
             SLIDE LEFT
           </CustomButton>
-          <Scroll horizontal>
+          <Scroll ref={scrollRef} horizontal>
             {!isFetching ? (
               <CategoryMenu categoriesTitle={categoriesTitle} />
             ) : null}
           </Scroll>
-          <CustomButton
-            onClick={() => (document.querySelector(".scroll").scrollLeft -= 20)}
-          >
+          <CustomButton onClick={() => (scrollRef.current.scrollLeft -= 20)}>
             SLIDE RIGHT
           </CustomButton>
         </CategoryMenuContainer>

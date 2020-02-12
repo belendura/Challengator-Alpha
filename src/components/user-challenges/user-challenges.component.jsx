@@ -1,6 +1,6 @@
 import React from "react";
 
-import ChallengeItem from "../challenge-item/challenge-item.component";
+import ChallengePreview from "../challenge-preview/challenge-preview.component";
 
 import { UserChallengesContainer } from "./user-challenges.styles.jsx";
 
@@ -9,7 +9,7 @@ const UserChallenges = ({ selectedChallenges }) => {
     <div>
       <UserChallengesContainer>
         {selectedChallenges.map((item, itemIndex) => (
-          <ChallengeItem key={itemIndex} item={item} />
+          <ChallengePreview key={itemIndex} item={item} />
         ))}
       </UserChallengesContainer>
     </div>

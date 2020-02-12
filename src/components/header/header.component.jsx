@@ -5,8 +5,6 @@ import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
-import { ReactComponent as Logo } from "../../assets/logo.svg";
-
 import UserInfo from "../user-info/user-info.component";
 
 import { signOutStart } from "../../redux/user/user.actions";
@@ -15,6 +13,7 @@ import {
   HeaderContainer,
   MiscelaneousContainer,
   LogoContainer,
+  LogoPicture,
   Signed,
   SignOut,
   User,
@@ -29,7 +28,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Link to="/">
-        <Logo className="logo" />
+        <LogoPicture />
       </Link>
       <LogoContainer>
         {currentUser ? (

@@ -1,17 +1,20 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { selectModalData } from "../../redux/modal/modal.selectors";
 import { closeModal } from "../../redux/modal/modal.actions";
 
-import ProposeChallenge from "../propose-challenge/propose-challenge.component";
-import Alerts from "../alerts/alerts.component";
 import ClickOutside from "../click-outside/click-outside.component";
 
 import {
   InnerModalOuterContainer,
   InnerModalContainer
 } from "./inner-modal.styles.jsx";
+
+const ProposeChallenge = React.lazy(() =>
+  import("../propose-challenge/propose-challenge.component")
+);
+const Alerts = React.lazy(() => import("../alerts/alerts.component"));
 
 const MODALS = {
   PROPOSE_CHALLENGE: ProposeChallenge,
@@ -24,13 +27,15 @@ const InnerModal = () => {
   const modalData = useSelector(selectModalData, shallowEqual);
   const CurrentModal = MODALS[modalData.modalType];
   return (
-    <div className="inner-modal-outer-container">
+    <InnerModalOuterContainer>
       <ClickOutside action={() => dispatch(closeModal())}>
-        <div className="inner-modal-container">
-          <CurrentModal {...modalData.modalProps} />
-        </div>
+        <InnerModalContainer>
+          <Suspense fallback={<div>Loading...</div>}>
+            <CurrentModal {...modalData.modalProps} />
+          </Suspense>
+        </InnerModalContainer>
       </ClickOutside>
-    </div>
+    </InnerModalOuterContainer>
   );
 };
 

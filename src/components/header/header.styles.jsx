@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from "../../assets/belt1.svg";
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -7,23 +8,17 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
-  background: linear-gradient(
-    to bottom,
-    rgba(241, 226, 202, 1) 0%,
-    rgba(189, 157, 107, 0.95) 46%,
-    rgba(178, 141, 83, 0.94) 62%,
-    rgba(231, 212, 182, 0.9) 100%
-  );
-  border-bottom: rgb(97, 76, 31) 1px;
-  border-radius: 6px;
 `;
 
-export const LogoContainer = styled(Link)`
-  height: 100%;
-  width: 120px;
-  padding: 25px;
+export const LogoContainer = styled.div`
+  height: 8vh;
 `;
+
+export const LogoPicture = styled(Logo)`
+  width: 60%;
+  padding: 5px 5px;
+`;
+
 export const MiscelaneousContainer = styled.div`
   width: 30%;
   height: 100%;
@@ -54,10 +49,7 @@ export const SignIn = styled(Link)`
 export const UserInfoContainer = styled.div`
   width: 30%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 `;
 export const UserInfo = styled.div`
-  padding: 10px 15px;
+  padding: 0px 15px;
 `;
