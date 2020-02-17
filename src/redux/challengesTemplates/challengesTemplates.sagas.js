@@ -6,7 +6,9 @@ import {
   uploadFile,
   firestore,
   convertChallengesSnapshotToMap,
-  createChallengeTemplateDocument
+  createChallengeTemplateDocument,
+  updateLikes,
+  updateUnlikes
 } from "../../firebase/firebase.utils";
 
 import {
@@ -14,7 +16,11 @@ import {
   fetchChallengesTemplateSuccess,
   fetchChallengesTemplateFailure,
   storeChallengeTemplateSuccess,
-  storeChallengeTemplateFailure
+  storeChallengeTemplateFailure,
+  IncreaseLikesChallengeTemplateSuccess,
+  IncreaseLikesChallengeTemplateFailure,
+  IncreaseUnlikesChallengeTemplateSuccess,
+  IncreaseUnlikesChallengeTemplateFailure
 } from "./challengesTemplates.actions";
 
 import challengeTemplateActionTypes from "./challengesTemplates.types";
@@ -88,10 +94,48 @@ export function* fetchChallengesAsync() {
   }
 }
 
+export function* onIncreaseLikesChallengeTemplateStart() {
+  yield takeLatest(
+    challengeTemplateActionTypes.INCREASE_LIKES_CHALLENGE_TEMPLATE_START,
+    updateChallengesLikeAsync
+  );
+}
+
+export function* updateChallengesLikeAsync({
+  payload: { templateId, category, user }
+}) {
+  try {
+    yield call(updateLikes, templateId, category, user);
+    yield put(IncreaseLikesChallengeTemplateSuccess());
+  } catch (error) {
+    yield put(IncreaseLikesChallengeTemplateFailure(error.message));
+  }
+}
+
+export function* onIncreaseUnlikesChallengeTemplateStart() {
+  yield takeLatest(
+    challengeTemplateActionTypes.INCREASE_UNLIKES_CHALLENGE_TEMPLATE_START,
+    updateChallengesUnlikeAsync
+  );
+}
+
+export function* updateChallengesUnlikeAsync({
+  payload: { templateId, category, user }
+}) {
+  try {
+    yield call(updateUnlikes, templateId, category, user);
+    yield put(IncreaseUnlikesChallengeTemplateSuccess());
+  } catch (error) {
+    yield put(IncreaseUnlikesChallengeTemplateFailure(error.message));
+  }
+}
+
 export function* challengesTemplatesSagas() {
   yield all([
     call(onProposeChallengeStart),
     call(onfetchChallengesStart),
-    call(onStoreChallengeTemplateStart)
+    call(onStoreChallengeTemplateStart),
+    call(onIncreaseLikesChallengeTemplateStart),
+    call(onIncreaseUnlikesChallengeTemplateStart)
   ]);
 }

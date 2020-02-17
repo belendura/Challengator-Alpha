@@ -58,3 +58,40 @@ export const storeChallengeTemplateFailure = error => ({
   type: challengeTemplateActionTypes.STORE_CHALLENGE_TEMPLATE_FAILURE,
   payload: error
 });
+
+export const IncreaseLikesChallengeTemplateStart = (
+  templateId,
+  category,
+  user
+) => ({
+  type: challengeTemplateActionTypes.INCREASE_LIKES_CHALLENGE_TEMPLATE_START,
+  payload: { templateId, category, user }
+});
+
+export const IncreaseLikesChallengeTemplateSuccess = () => ({
+  type: challengeTemplateActionTypes.INCREASE_LIKES_CHALLENGE_TEMPLATE_SUCCESS
+});
+
+export const IncreaseLikesChallengeTemplateFailure = error => ({
+  type: challengeTemplateActionTypes.INCREASE_LIKES_CHALLENGE_TEMPLATE_FAILURE,
+  payload: error
+});
+
+export const IncreaseUnlikesChallengeTemplateStart = (
+  templateId,
+  category,
+  user
+) => ({
+  type: challengeTemplateActionTypes.INCREASE_UNLIKES_CHALLENGE_TEMPLATE_START,
+  payload: { templateId, category, user }
+});
+
+export const IncreaseUnlikesChallengeTemplateSuccess = () => ({
+  type: challengeTemplateActionTypes.INCREASE_UNLIKES_CHALLENGE_TEMPLATE_SUCCESS
+});
+
+export const IncreaseUnlikesChallengeTemplateFailure = error => ({
+  type:
+    challengeTemplateActionTypes.INCREASE_UNLIKES_CHALLENGE_TEMPLATE_FAILURE,
+  payload: error
+});

@@ -1,10 +1,5 @@
 import challengeInstanceActionTypes from "./challengesInstances.types";
 
-export const acceptChallenge = item => ({
-  type: challengeInstanceActionTypes.ACCEPT_CHALLENGE,
-  payload: item
-});
-
 export const storeChallengeInstanceStart = (
   challengeInstance,
   contenders,
@@ -22,6 +17,11 @@ export const storeChallengeInstanceSuccess = challengeInstance => ({
 export const storeChallengeInstanceFailure = error => ({
   type: challengeInstanceActionTypes.STORE_CHALLENGE_INSTANCE_FAILURE,
   payload: error
+});
+
+export const acceptChallenge = item => ({
+  type: challengeInstanceActionTypes.ACCEPT_CHALLENGE,
+  payload: item
 });
 
 export const cancelChallenge = item => ({

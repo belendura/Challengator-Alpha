@@ -5,5 +5,5 @@ export const CategoryMenuContainer = styled.div`
   height: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;

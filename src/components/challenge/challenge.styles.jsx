@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ChallengeContainer = styled.div`
-  width: 340px;
-  height: auto;
+  /*width: 340px;
+  height: auto;*/
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -10,10 +10,10 @@ export const ChallengeContainer = styled.div`
   justify-content: center;
   /*height: auto;
   width: auto;*/
-  background-color: rgba(255, 255, 255, 0.8);
+  /*background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 5px 10px 18px #888888;
   border: 1px solid yellow;
-  border-radius: 10px;
+  border-radius: 10px;*/
   padding: 10px 10px;
 `;
 
@@ -38,11 +38,13 @@ export const Footer = styled.div`
   width: fit-content;
   height: 5%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 `;
 
-export const Visualizations = styled.span`
+export const FooterData = styled.span`
   padding-right: 10px;
 `;
 

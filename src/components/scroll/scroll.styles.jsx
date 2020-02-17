@@ -17,8 +17,7 @@ const getScrollStyles = props => {
 };
 
 export const ScrollContainer = styled.div`
-  margin: 10px;
-
+  margin: 0 5px;
   ${getScrollStyles}
 
   .scroll::-webkit-scrollbar {

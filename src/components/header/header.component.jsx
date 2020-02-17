@@ -12,7 +12,7 @@ import { signOutStart } from "../../redux/user/user.actions";
 import {
   HeaderContainer,
   MiscelaneousContainer,
-  LogoContainer,
+  UserInfoContainer,
   LogoPicture,
   Signed,
   SignOut,
@@ -30,11 +30,9 @@ const Header = () => {
       <Link to="/">
         <LogoPicture />
       </Link>
-      <LogoContainer>
-        {currentUser ? (
-          <UserInfo className="user-info" currentUser={currentUser} />
-        ) : null}
-      </LogoContainer>
+      <UserInfoContainer>
+        {currentUser ? <UserInfo currentUser={currentUser} /> : null}
+      </UserInfoContainer>
       <MiscelaneousContainer>
         {currentUser ? (
           <Signed>

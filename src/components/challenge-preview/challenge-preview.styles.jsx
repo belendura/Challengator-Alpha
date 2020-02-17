@@ -42,7 +42,7 @@ export const Footer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Visualizations = styled.span`
+export const FooterData = styled.span`
   padding-right: 10px;
 `;
 

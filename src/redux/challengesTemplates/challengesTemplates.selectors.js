@@ -27,6 +27,24 @@ export const selectCurrentCategory = createSelector(
   challengesTemplates => challengesTemplates.selectedCategory
 );
 
+export const selectChallengeTemplatePreview = createSelector(
+  [selectChallengesTemplates, (_, templateId) => templateId],
+  (challengesTemplates, templateId) =>
+    challengesTemplates && templateId
+      ? Object.values(challengesTemplates.challengesTemplatesCategories).reduce(
+          (accumulator, category) => {
+            if (category.challenges.length) {
+              category.challenges.find(item => {
+                if (item.templateId === templateId) return (accumulator = item);
+              });
+            }
+            return accumulator;
+          },
+          {}
+        )
+      : null
+);
+
 export const selectChallengesTemplatesId = createSelector(
   [selectChallengesTemplates],
   challengesTemplates =>

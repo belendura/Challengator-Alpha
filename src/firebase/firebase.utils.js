@@ -177,6 +177,8 @@ export const createChallengeTemplateDocument = async (
     minimumParticipants: 1,
     ranking: "",
     rating: "",
+    likes: { likes: 0, users: [] },
+    unlikes: { unlikes: 0, users: [] },
     visualizations: 0,
     timesShared: 0,
     approved: false,
@@ -434,6 +436,182 @@ export const uploadFile = async ({
       });
     }
   );
+};
+
+export const updateLikes = async (templateId, category, user) => {
+  const challengeTemplatesCategoryRef = firestore.doc(
+    `challengesTemplates/${category}`
+  );
+
+  const snapShot = await challengeTemplatesCategoryRef.get();
+
+  const challengeData = snapShot.data();
+
+  const challengeTemplate = challengeData.challenges.find(item => {
+    return item.templateId === templateId;
+  });
+
+  const likeFound = challengeTemplate.likes.users.some(userItem => {
+    return userItem === user.id;
+  });
+
+  const unLikeFound = challengeTemplate.unlikes.users.some(userItem => {
+    return userItem === user.id;
+  });
+
+  let updatedChallenge = {};
+  const updatedLikeUsers = [...challengeTemplate.likes.users];
+
+  const updateUnlikes = () => {
+    return challengeTemplate.unlikes.unlikes > 0
+      ? challengeTemplate.unlikes.unlikes - 1
+      : (challengeTemplate.unlikes.unlikes = 0);
+  };
+
+  const updateLikes = () => {
+    return challengeTemplate.likes.likes > 0
+      ? challengeTemplate.likes.likes - 1
+      : (challengeTemplate.likes.likes = 0);
+  };
+
+  if (!likeFound) {
+    updatedLikeUsers.push(user.id);
+    updatedChallenge = {
+      ...challengeTemplate,
+      likes: {
+        users: updatedLikeUsers,
+        likes: challengeTemplate.likes.likes + 1
+      }
+    };
+    if (unLikeFound) {
+      const updatedUnLikeUsers = challengeTemplate.unlikes.users.filter(
+        userItem => {
+          return userItem !== user.id;
+        }
+      );
+      const updatedUnlikes = updateUnlikes();
+
+      updatedChallenge = {
+        ...challengeTemplate,
+        unlikes: {
+          users: updatedUnLikeUsers,
+          likes: updatedUnlikes
+        }
+      };
+    }
+  } else if (likeFound) {
+    const updatedLikes = updateLikes();
+    updatedChallenge = {
+      ...challengeTemplate,
+      likes: {
+        users: updatedLikeUsers,
+        likes: updatedLikes
+      }
+    };
+  }
+
+  const oldChallenges = challengeData.challenges.filter(item => {
+    return item.templateId !== templateId;
+  });
+
+  try {
+    const newChallenges = [...oldChallenges, updatedChallenge];
+
+    await challengeTemplatesCategoryRef.update({
+      challenges: newChallenges
+    });
+  } catch (error) {
+    console.log("Error increasing likes", error.message);
+  }
+};
+
+export const updateUnlikes = async (templateId, category, user) => {
+  const challengeTemplatesCategoryRef = firestore.doc(
+    `challengesTemplates/${category}`
+  );
+
+  const snapShot = await challengeTemplatesCategoryRef.get();
+
+  const challengeData = snapShot.data();
+
+  const challengeTemplate = challengeData.challenges.find(item => {
+    return item.templateId === templateId;
+  });
+
+  const likeFound = challengeTemplate.likes.users.some(userItem => {
+    return userItem === user.id;
+  });
+
+  const unLikeFound = challengeTemplate.unlikes.users.some(userItem => {
+    return userItem === user.id;
+  });
+
+  let updatedChallenge = {};
+  const updatedUnlikeUsers = [...challengeTemplate.unlikes.users];
+
+  const updateUnlikes = () => {
+    return challengeTemplate.unlikes.unlikes > 0
+      ? challengeTemplate.unlikes.unlikes - 1
+      : (challengeTemplate.unlikes.unlikes = 0);
+  };
+
+  const updateLikes = () => {
+    return challengeTemplate.likes.likes > 0
+      ? challengeTemplate.likes.likes - 1
+      : (challengeTemplate.likes.likes = 0);
+  };
+
+  if (!unLikeFound) {
+    updatedUnlikeUsers.push(user.id);
+    updatedChallenge = {
+      ...challengeTemplate,
+      unlikes: {
+        users: updatedUnlikeUsers,
+        unlikes: challengeTemplate.unlikes.unlikes + 1
+      }
+    };
+    if (likeFound) {
+      const updatedLikeUsers = challengeTemplate.likes.users.filter(
+        userItem => {
+          return userItem !== user.id;
+        }
+      );
+      const updatedLikes = updateLikes();
+
+      updatedChallenge = {
+        ...challengeTemplate,
+        likes: {
+          users: updatedLikeUsers,
+          likes: updatedLikes
+        }
+      };
+    }
+  } else if (unLikeFound) {
+    const updatedUnlikes = updateUnlikes();
+
+    updatedChallenge = {
+      ...challengeTemplate,
+      unlikes: {
+        users: updatedUnlikeUsers,
+        unlikes: updatedUnlikes
+      }
+    };
+  }
+
+  const oldChallenges = challengeData.challenges.filter(item => {
+    return item.templateId !== templateId;
+  });
+  console.log("updatedChallenge", updatedChallenge);
+
+  try {
+    const newChallenges = [...oldChallenges, updatedChallenge];
+
+    await challengeTemplatesCategoryRef.update({
+      challenges: newChallenges
+    });
+  } catch (error) {
+    console.log("Error increasing unlikes", error.message);
+  }
 };
 
 firebase.initializeApp(config);

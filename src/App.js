@@ -11,6 +11,8 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import { selectShowModal } from "./redux/modal/modal.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 
+import { fetchChallengesTemplateStart } from "./redux/challengesTemplates/challengesTemplates.actions";
+
 import { GlobalStyles } from "./global.styles";
 
 const HomePage = React.lazy(() =>
@@ -38,6 +40,10 @@ const App = () => {
     dispatch(checkUserSession());
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchChallengesTemplateStart());
+  }, []);
+
   return (
     <div>
       <GlobalStyles />
@@ -57,7 +63,11 @@ const App = () => {
               currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
             }
           />
-          <Route exact path="/challenge" component={ChallengeTemplatePage} />
+          <Route
+            exact
+            path="/challenge/:templateId"
+            component={ChallengeTemplatePage}
+          />
           <Route
             exact
             path="/user-challenge"

@@ -1,13 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { useDispatch } from "react-redux";
 
 import CustomButton from "../custom-button/custom-button.component";
-
-import { acceptChallenge } from "../../redux/challengesInstances/challengesInstances.actions";
 
 import {
   ChallengeContainer,
@@ -15,14 +11,21 @@ import {
   Name,
   Description,
   Footer,
-  Visualizations
+  FooterData
 } from "./challenge-preview.styles.jsx";
 
 const ChallengePreview = ({ item }) => {
-  const { name, url, description, visualizations, difficulty } = item;
+  const {
+    name,
+    url,
+    description,
+    visualizations,
+    difficulty,
+    templateId,
+    ...itemData
+  } = item;
   const dispatch = useDispatch();
   let history = useHistory();
-  const currentUser = useSelector(selectCurrentUser, shallowEqual);
   return (
     <ChallengeContainer>
       <iframe
@@ -38,12 +41,12 @@ const ChallengePreview = ({ item }) => {
         <Name>{name}</Name>
         <Description>{description}</Description>
         <Footer>
-          <Visualizations>{visualizations} visualitzations</Visualizations>
+          <FooterData>{visualizations} visualitzations</FooterData>
+          <FooterData>Difficulty: {difficulty} </FooterData>
         </Footer>
         <CustomButton
           onClick={() => {
-            currentUser ? history.push("/challenge") : history.push("/signIn");
-            dispatch(acceptChallenge(item));
+            history.push(`/challenge/${templateId}`);
           }}
         >
           VIEW CHALLENGE

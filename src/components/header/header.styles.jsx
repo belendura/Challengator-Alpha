@@ -10,10 +10,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-export const LogoContainer = styled.div`
-  height: 8vh;
-`;
-
 export const LogoPicture = styled(Logo)`
   width: 60%;
   padding: 5px 5px;
@@ -48,8 +44,4 @@ export const SignIn = styled(Link)`
 
 export const UserInfoContainer = styled.div`
   width: 30%;
-  height: 100%;
-`;
-export const UserInfo = styled.div`
-  padding: 0px 15px;
 `;

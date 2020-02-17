@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-
-import { fetchChallengesTemplateStart } from "../../redux/challengesTemplates/challengesTemplates.actions";
 
 import { openModal } from "../../redux/modal/modal.actions";
 
@@ -20,10 +18,6 @@ import { HomePageContainer, CategoryMenuContainer } from "./homepage.styles";
 const HomePage = () => {
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
-
-  useEffect(() => {
-    dispatch(fetchChallengesTemplateStart());
-  }, []);
 
   const isFetching = useSelector(
     selectChallengesTemplatesFetching,
