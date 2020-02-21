@@ -1,17 +1,18 @@
 import React, { useEffect, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-
-import Modal from "./components/modal/modal.component";
-import InnerModal from "./components/modal/inner-modal.component";
-
-import Header from "./components/header/header.component";
+import { createStructuredSelector } from "reselect";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { selectShowModal } from "./redux/modal/modal.selectors";
-import { checkUserSession } from "./redux/user/user.actions";
+import { selectChallengesTemplatesFetching } from "./redux/challengesTemplates/challengesTemplates.selectors";
 
+import { checkUserSession } from "./redux/user/user.actions";
 import { fetchChallengesTemplateStart } from "./redux/challengesTemplates/challengesTemplates.actions";
+
+import Modal from "./components/modal/modal.component";
+import InnerModal from "./components/modal/inner-modal.component";
+import Header from "./components/header/header.component";
 
 import { GlobalStyles } from "./global.styles";
 
@@ -31,10 +32,19 @@ const ChallengeInstancePage = React.lazy(() =>
   import("./pages/challenge-instance-page/challenge-instance-page.component")
 );
 
+const selectData = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  showModal: selectShowModal,
+  isFetching: selectChallengesTemplatesFetching
+});
+
 const App = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser, shallowEqual);
-  const showModal = useSelector(selectShowModal, shallowEqual);
+  const { currentUser, showModal, isFetching } = useSelector(
+    selectData,
+    shallowEqual
+  );
+  // const showModal = useSelector(selectShowModal, shallowEqual);
 
   useEffect(() => {
     dispatch(checkUserSession());
@@ -63,11 +73,13 @@ const App = () => {
               currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
             }
           />
-          <Route
-            exact
-            path="/challenge/:templateId"
-            component={ChallengeTemplatePage}
-          />
+          {!isFetching ? (
+            <Route
+              exact
+              path="/challenge/:templateId"
+              component={ChallengeTemplatePage}
+            />
+          ) : null}
           <Route
             exact
             path="/user-challenge"

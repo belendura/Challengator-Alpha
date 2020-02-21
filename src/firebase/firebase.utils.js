@@ -177,8 +177,8 @@ export const createChallengeTemplateDocument = async (
     minimumParticipants: 1,
     ranking: "",
     rating: "",
-    likes: { likes: 0, users: [] },
-    unlikes: { unlikes: 0, users: [] },
+    likes: { likesSum: 0, likesUsers: [] },
+    unlikes: { unlikesSum: 0, unlikesUsers: [] },
     visualizations: 0,
     timesShared: 0,
     approved: false,
@@ -438,6 +438,18 @@ export const uploadFile = async ({
   );
 };
 
+const decreaseUnlikes = challengeTemplate => {
+  return challengeTemplate.unlikes.unlikesSum > 0
+    ? challengeTemplate.unlikes.unlikesSum - 1
+    : (challengeTemplate.unlikes.unlikesSum = 0);
+};
+
+const decreaseLikes = challengeTemplate => {
+  return challengeTemplate.likes.likesSum > 0
+    ? challengeTemplate.likes.likesSum - 1
+    : (challengeTemplate.likes.likesSum = 0);
+};
+
 export const updateLikes = async (templateId, category, user) => {
   const challengeTemplatesCategoryRef = firestore.doc(
     `challengesTemplates/${category}`
@@ -451,65 +463,59 @@ export const updateLikes = async (templateId, category, user) => {
     return item.templateId === templateId;
   });
 
-  const likeFound = challengeTemplate.likes.users.some(userItem => {
+  const likeFound = challengeTemplate.likes.likesUsers.some(userItem => {
     return userItem === user.id;
   });
 
-  const unLikeFound = challengeTemplate.unlikes.users.some(userItem => {
+  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(userItem => {
     return userItem === user.id;
   });
 
   let updatedChallenge = {};
-  const updatedLikeUsers = [...challengeTemplate.likes.users];
 
-  const updateUnlikes = () => {
-    return challengeTemplate.unlikes.unlikes > 0
-      ? challengeTemplate.unlikes.unlikes - 1
-      : (challengeTemplate.unlikes.unlikes = 0);
-  };
-
-  const updateLikes = () => {
-    return challengeTemplate.likes.likes > 0
-      ? challengeTemplate.likes.likes - 1
-      : (challengeTemplate.likes.likes = 0);
-  };
+  const updatedLikeUsers = [...challengeTemplate.likes.likesUsers];
 
   if (!likeFound) {
     updatedLikeUsers.push(user.id);
+
     updatedChallenge = {
       ...challengeTemplate,
       likes: {
-        users: updatedLikeUsers,
-        likes: challengeTemplate.likes.likes + 1
+        likesUsers: updatedLikeUsers,
+        likesSum: challengeTemplate.likes.likesSum + 1
       }
     };
     if (unLikeFound) {
-      const updatedUnLikeUsers = challengeTemplate.unlikes.users.filter(
+      const updatedUnlikeUsers = challengeTemplate.unlikes.unlikesUsers.filter(
         userItem => {
           return userItem !== user.id;
         }
       );
-      const updatedUnlikes = updateUnlikes();
+      const updatedUnlikes = decreaseUnlikes(challengeTemplate);
 
       updatedChallenge = {
-        ...challengeTemplate,
+        ...updatedChallenge,
         unlikes: {
-          users: updatedUnLikeUsers,
-          likes: updatedUnlikes
+          unlikesUsers: updatedUnlikeUsers,
+          unlikesSum: updatedUnlikes
         }
       };
     }
   } else if (likeFound) {
-    const updatedLikes = updateLikes();
+    const updatedLikes = decreaseLikes(challengeTemplate);
+    const updatedLikeUsers = challengeTemplate.likes.likesUsers.filter(
+      userItem => {
+        return userItem !== user.id;
+      }
+    );
     updatedChallenge = {
       ...challengeTemplate,
       likes: {
-        users: updatedLikeUsers,
-        likes: updatedLikes
+        likesUsers: updatedLikeUsers,
+        likesSum: updatedLikes
       }
     };
   }
-
   const oldChallenges = challengeData.challenges.filter(item => {
     return item.templateId !== templateId;
   });
@@ -520,6 +526,8 @@ export const updateLikes = async (templateId, category, user) => {
     await challengeTemplatesCategoryRef.update({
       challenges: newChallenges
     });
+
+    return { challenges: newChallenges };
   } catch (error) {
     console.log("Error increasing likes", error.message);
   }
@@ -538,62 +546,55 @@ export const updateUnlikes = async (templateId, category, user) => {
     return item.templateId === templateId;
   });
 
-  const likeFound = challengeTemplate.likes.users.some(userItem => {
+  const likeFound = challengeTemplate.likes.likesUsers.some(userItem => {
     return userItem === user.id;
   });
 
-  const unLikeFound = challengeTemplate.unlikes.users.some(userItem => {
+  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(userItem => {
     return userItem === user.id;
   });
 
   let updatedChallenge = {};
-  const updatedUnlikeUsers = [...challengeTemplate.unlikes.users];
-
-  const updateUnlikes = () => {
-    return challengeTemplate.unlikes.unlikes > 0
-      ? challengeTemplate.unlikes.unlikes - 1
-      : (challengeTemplate.unlikes.unlikes = 0);
-  };
-
-  const updateLikes = () => {
-    return challengeTemplate.likes.likes > 0
-      ? challengeTemplate.likes.likes - 1
-      : (challengeTemplate.likes.likes = 0);
-  };
+  const updatedUnlikeUsers = [...challengeTemplate.unlikes.unlikesUsers];
 
   if (!unLikeFound) {
     updatedUnlikeUsers.push(user.id);
     updatedChallenge = {
       ...challengeTemplate,
       unlikes: {
-        users: updatedUnlikeUsers,
-        unlikes: challengeTemplate.unlikes.unlikes + 1
+        unlikesUsers: updatedUnlikeUsers,
+        unlikesSum: challengeTemplate.unlikes.unlikesSum + 1
       }
     };
     if (likeFound) {
-      const updatedLikeUsers = challengeTemplate.likes.users.filter(
+      const updatedLikeUsers = challengeTemplate.likes.likesUsers.filter(
         userItem => {
           return userItem !== user.id;
         }
       );
-      const updatedLikes = updateLikes();
+      const updatedLikes = decreaseLikes(challengeTemplate);
 
       updatedChallenge = {
-        ...challengeTemplate,
+        ...updatedChallenge,
         likes: {
-          users: updatedLikeUsers,
-          likes: updatedLikes
+          likesUsers: updatedLikeUsers,
+          likesSum: updatedLikes
         }
       };
     }
   } else if (unLikeFound) {
-    const updatedUnlikes = updateUnlikes();
+    const updatedUnlikes = decreaseUnlikes(challengeTemplate);
+    const updatedUnlikeUsers = challengeTemplate.unlikes.unlikesUsers.filter(
+      userItem => {
+        return userItem !== user.id;
+      }
+    );
 
     updatedChallenge = {
       ...challengeTemplate,
       unlikes: {
-        users: updatedUnlikeUsers,
-        unlikes: updatedUnlikes
+        unlikesUsers: updatedUnlikeUsers,
+        unlikesSum: updatedUnlikes
       }
     };
   }
@@ -601,7 +602,6 @@ export const updateUnlikes = async (templateId, category, user) => {
   const oldChallenges = challengeData.challenges.filter(item => {
     return item.templateId !== templateId;
   });
-  console.log("updatedChallenge", updatedChallenge);
 
   try {
     const newChallenges = [...oldChallenges, updatedChallenge];
@@ -609,6 +609,8 @@ export const updateUnlikes = async (templateId, category, user) => {
     await challengeTemplatesCategoryRef.update({
       challenges: newChallenges
     });
+
+    return { challenges: newChallenges };
   } catch (error) {
     console.log("Error increasing unlikes", error.message);
   }

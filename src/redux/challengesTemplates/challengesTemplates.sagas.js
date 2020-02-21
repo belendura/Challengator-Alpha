@@ -105,8 +105,8 @@ export function* updateChallengesLikeAsync({
   payload: { templateId, category, user }
 }) {
   try {
-    yield call(updateLikes, templateId, category, user);
-    yield put(IncreaseLikesChallengeTemplateSuccess());
+    const newChallenges = yield call(updateLikes, templateId, category, user);
+    yield put(IncreaseLikesChallengeTemplateSuccess(newChallenges, category));
   } catch (error) {
     yield put(IncreaseLikesChallengeTemplateFailure(error.message));
   }
@@ -123,8 +123,8 @@ export function* updateChallengesUnlikeAsync({
   payload: { templateId, category, user }
 }) {
   try {
-    yield call(updateUnlikes, templateId, category, user);
-    yield put(IncreaseUnlikesChallengeTemplateSuccess());
+    const newChallenges = yield call(updateUnlikes, templateId, category, user);
+    yield put(IncreaseUnlikesChallengeTemplateSuccess(newChallenges, category));
   } catch (error) {
     yield put(IncreaseUnlikesChallengeTemplateFailure(error.message));
   }

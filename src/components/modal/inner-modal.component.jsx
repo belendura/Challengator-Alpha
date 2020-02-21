@@ -15,10 +15,14 @@ const ProposeChallenge = React.lazy(() =>
   import("../propose-challenge/propose-challenge.component")
 );
 const Alerts = React.lazy(() => import("../alerts/alerts.component"));
+const ChallengeContenders = React.lazy(() =>
+  import("../challenge-contenders/challenge-contenders.component")
+);
 
 const MODALS = {
   PROPOSE_CHALLENGE: ProposeChallenge,
-  ALERTS: Alerts
+  ALERTS: Alerts,
+  CHALLENGE_CONTENDERS: ChallengeContenders
 };
 
 const InnerModal = () => {

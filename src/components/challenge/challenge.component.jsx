@@ -7,11 +7,13 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectChallengeTemplatePreview } from "../../redux/challengesTemplates/challengesTemplates.selectors";
 
-import { acceptChallenge } from "../../redux/challengesInstances/challengesInstances.actions";
+//import { acceptChallenge } from "../../redux/challengesInstances/challengesInstances.actions";
 import {
   IncreaseLikesChallengeTemplateStart,
   IncreaseUnlikesChallengeTemplateStart
 } from "../../redux/challengesTemplates/challengesTemplates.actions";
+
+import { openModal } from "../../redux/modal/modal.actions";
 
 import CustomButton from "../custom-button/custom-button.component";
 import Like from "../like/like.component";
@@ -49,9 +51,9 @@ const ChallengeItem = () => {
     unlikes,
     category
   } = challenge;
-  console.log("challenge", challenge);
-  console.log("likes", likes);
-  console.log("unlikes", unlikes);
+
+  const { likesSum, likesUsers } = likes;
+  const { unlikesSum, unlikesUsers } = unlikes;
 
   const handleIncreaseLikes = () => {
     if (!currentUser) {
@@ -89,14 +91,15 @@ const ChallengeItem = () => {
           <FooterData>{visualizations} visualitzations</FooterData>
           <FooterData>Difficulty: {difficulty} </FooterData>
           <Like handleIncreaseLikes={handleIncreaseLikes} />
-          {/*} <FooterData>{likes} </FooterData>*/}
+          <FooterData>{likesSum}</FooterData>
           <Unlike handleIncreaseUnlikes={handleIncreaseUnlikes} />
-          {/* <FooterData>{unlikes} </FooterData>*/}
+          <FooterData>{unlikesSum} </FooterData>
         </Footer>
         <CustomButton
           onClick={() => {
             if (!currentUser) history.push("/signIn"); //!currentUser && history.push("/signIn")
-            dispatch(acceptChallenge(challenge));
+            // dispatch(acceptChallenge(challenge));
+            dispatch(openModal("CHALLENGE_CONTENDERS", challenge));
           }}
         >
           ACCEPT CHALLENGE

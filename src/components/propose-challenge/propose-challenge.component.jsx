@@ -13,7 +13,7 @@ import {
   proposeChallengeStart,
   storeChallengeTemplateStart
 } from "../../redux/challengesTemplates/challengesTemplates.actions";
-import { openModal } from "../../redux/modal/modal.actions";
+//import { openModal } from "../../redux/modal/modal.actions";
 
 import {
   ProposeChallengeContainer,
