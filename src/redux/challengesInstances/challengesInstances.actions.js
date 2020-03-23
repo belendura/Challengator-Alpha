@@ -19,16 +19,6 @@ export const storeChallengeInstanceFailure = error => ({
   payload: error
 });
 
-export const acceptChallenge = item => ({
-  type: challengeInstanceActionTypes.ACCEPT_CHALLENGE,
-  payload: item
-});
-
-export const cancelChallenge = item => ({
-  type: challengeInstanceActionTypes.CANCEL_CHALLENGE,
-  payload: item
-});
-
 export const removeChallengeStart = item => ({
   type: challengeInstanceActionTypes.REMOVE_CHALLENGE_START,
   payload: item
@@ -43,16 +33,56 @@ export const removeChallengeFailure = error => ({
   payload: error
 });
 
-export const fetchChallengesInstanceStart = () => ({
-  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_START
+export const fetchChallengesInstancesStart = () => ({
+  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_START
 });
 
-export const fetchChallengesInstanceSuccess = challengesInstances => ({
-  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_SUCCESS,
+export const fetchChallengesInstancesSuccess = challengesInstances => ({
+  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_SUCCESS,
   payload: challengesInstances
 });
 
-export const fetchChallengesInstanceFailure = error => ({
-  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_FAILURE,
+export const fetchChallengesInstancesFailure = error => ({
+  type: challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_FAILURE,
+  payload: error
+});
+
+export const IncreaseLikesChallengeInstanceStart = (
+  instanceId,
+  contender,
+  user
+) => ({
+  type: challengeInstanceActionTypes.INCREASE_LIKES_CHALLENGE_INSTANCE_START,
+  payload: { instanceId, contender, user }
+});
+
+export const IncreaseLikesChallengeInstanceSuccess = newChallenge => ({
+  type: challengeInstanceActionTypes.INCREASE_LIKES_CHALLENGE_INSTANCE_SUCCESS,
+  payload: { newChallenge }
+});
+
+export const IncreaseLikesChallengeInstanceFailure = error => ({
+  type: challengeInstanceActionTypes.INCREASE_LIKES_CHALLENGE_INSTANCE_FAILURE,
+  payload: error
+});
+
+export const IncreaseUnlikesChallengeInstanceStart = (
+  instanceId,
+  contender,
+  user
+) => ({
+  type: challengeInstanceActionTypes.INCREASE_UNLIKES_CHALLENGE_INSTANCE_START,
+  payload: { instanceId, contender, user }
+});
+
+export const IncreaseUnlikesChallengeInstanceSuccess = newChallenge => ({
+  type:
+    challengeInstanceActionTypes.INCREASE_UNLIKES_CHALLENGE_INSTANCE_SUCCESS,
+  payload: { newChallenge }
+});
+
+export const IncreaseUnlikesChallengeInstanceFailure = error => ({
+  type:
+    challengeInstanceActionTypes.INCREASE_UNLIKES_CHALLENGE_INSTANCE_FAILURE,
   payload: error
 });

@@ -1,7 +1,6 @@
 import challengeInstanceActionTypes from "./challengesInstances.types";
 
 const INITIAL_STATE = {
-  challenge_in_progress: false,
   challenge_instance: {},
   challenges: {},
   contenders: [],
@@ -12,34 +11,47 @@ const INITIAL_STATE = {
 
 const challengeReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case challengeInstanceActionTypes.ACCEPT_CHALLENGE:
+    case challengeInstanceActionTypes.STORE_CHALLENGE_SUCCESS:
       return {
         ...state,
-        challenge_in_progress: true,
         challenge_instance: action.payload
       };
-    case challengeInstanceActionTypes.CANCEL_CHALLENGE:
-      return {
-        ...state,
-        challenge_in_progress: false
-      };
-    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_START:
+    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_START:
       return {
         ...state,
         isFetching: true
       };
-    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_SUCCESS:
+    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_SUCCESS:
       return {
         ...state,
         isFetching: false,
         challenges: action.payload
       };
-    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCE_FAILURE:
+    case challengeInstanceActionTypes.FETCH_CHALLENGES_INSTANCES_FAILURE:
     case challengeInstanceActionTypes.STORE_CHALLENGE_INSTANCE_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.payload
+      };
+    case challengeInstanceActionTypes.INCREASE_LIKES_CHALLENGE_INSTANCE_SUCCESS:
+    case challengeInstanceActionTypes.INCREASE_UNLIKES_CHALLENGE_INSTANCE_SUCCESS:
+      return {
+        ...state,
+        challenges: Object.entries(state.challenges).reduce(
+          (accumulator, item) => {
+            const [key, value] = item;
+            if (key !== action.payload.newChallenge.instanceId) {
+              accumulator[key] = value;
+            } else {
+              accumulator[action.payload.newChallenge.instanceId] =
+                action.payload.newChallenge;
+            }
+
+            return accumulator;
+          },
+          {}
+        )
       };
     default:
       return state;

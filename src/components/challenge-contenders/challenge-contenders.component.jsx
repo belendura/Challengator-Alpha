@@ -35,8 +35,21 @@ const ChallengeContenders = ({ challenge }) => {
   );
 
   const handleChange = event => {
-    const { value, name } = event.target;
-    setData({ ...data, [name]: [value] });
+    const result = getValue(event.target);
+    const { name } = event.target;
+
+    setData({ ...data, [name]: result });
+  };
+
+  const getValue = select => {
+    const result = [];
+    const options = select && select.selectedOptions;
+
+    for (const option of options) {
+      result.push(option.value);
+    }
+
+    return result;
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
@@ -24,8 +24,10 @@ const ChallengePreview = ({ item }) => {
     templateId,
     ...itemData
   } = item;
+
   const dispatch = useDispatch();
   let history = useHistory();
+
   return (
     <ChallengeContainer>
       <iframe

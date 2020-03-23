@@ -8,8 +8,18 @@ import {
 
 const UserInfo = ({ currentUser }) => (
   <UserInfoContainer>
-    <UserDataContainer>{currentUser.userData.displayName}</UserDataContainer>
-    <UserDataContainer>{currentUser.statistics.ranking}</UserDataContainer>
+    {currentUser.photoUrl ? (
+      <UserPicturesContainer
+        src={currentUser.photoUrl}
+        alt="User Picture"
+        height="40"
+        width="30"
+      />
+    ) : null}
+    <UserDataContainer>{currentUser.displayName}</UserDataContainer>
+    <UserDataContainer>
+      {currentUser.statistics.globalRanking}
+    </UserDataContainer>
   </UserInfoContainer>
 );
 

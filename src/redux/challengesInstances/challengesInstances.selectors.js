@@ -58,3 +58,31 @@ export const selectCompletedChallengesInstance = createSelector(
         })
       : []
 );
+
+export const selectChallengesInstanceByTemplateId = createSelector(
+  [selectChallengesInstances, (_, templateId) => templateId],
+  (challengesInstances, templateId) =>
+    challengesInstances && templateId
+      ? Object.values(challengesInstances.challenges).reduce(
+          (accumulator, item) => {
+            if (item.templateId === templateId) {
+              item.contenders.forEach(contenderItem => {
+                if (
+                  !contenderItem.public &&
+                  contenderItem.status === "accepted"
+                )
+                  return accumulator.push({
+                    instanceId: item.instanceId,
+                    contenderId: contenderItem.contender,
+                    rating: contenderItem.rating,
+                    url: contenderItem.proof.url
+                  });
+              });
+            }
+
+            return accumulator;
+          },
+          []
+        )
+      : []
+);

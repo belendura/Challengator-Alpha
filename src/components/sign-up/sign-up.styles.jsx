@@ -15,10 +15,13 @@ export const Text = styled.label`
 `;
 
 export const GenderContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+  padding: 10px;
+`;
+
+export const GenderContainerData = styled.div`
+  /*display: flex;
+  /*flex-direction: row;*/
   justify-content: space-between;
-  margin-right: 40px;
 `;
 
 export const CountryContainer = styled.div`

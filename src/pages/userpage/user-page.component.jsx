@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { fetchChallengesInstanceStart } from "../../redux/challengesInstances/challengesInstances.actions";
-import { fetchUsersStart } from "../../redux/users/users.actions";
-
 import {
   selectChallengesInstancesFetching,
   selectChallengeInstance,
@@ -80,11 +77,6 @@ const UserPage = () => {
     state => selectUsersOwnFriends(state, acceptedFriends),
     shallowEqual
   );
-
-  useEffect(() => {
-    dispatch(fetchChallengesInstanceStart());
-    dispatch(fetchUsersStart());
-  }, [fetchUsersStart, dispatch]);
 
   useEffect(() => {
     if (usersIsFetching || !currentUser) {

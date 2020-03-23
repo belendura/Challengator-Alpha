@@ -9,6 +9,8 @@ import { selectChallengesTemplatesFetching } from "./redux/challengesTemplates/c
 
 import { checkUserSession } from "./redux/user/user.actions";
 import { fetchChallengesTemplateStart } from "./redux/challengesTemplates/challengesTemplates.actions";
+import { fetchChallengesInstancesStart } from "./redux/challengesInstances/challengesInstances.actions";
+import { fetchUsersStart } from "./redux/users/users.actions";
 
 import Modal from "./components/modal/modal.component";
 import InnerModal from "./components/modal/inner-modal.component";
@@ -53,6 +55,14 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchChallengesTemplateStart());
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchChallengesInstancesStart());
+  }, [fetchChallengesInstancesStart, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUsersStart());
+  }, [fetchUsersStart, dispatch]);
 
   return (
     <div>

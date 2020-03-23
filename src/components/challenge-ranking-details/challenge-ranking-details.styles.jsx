@@ -23,10 +23,6 @@ export const Name = styled.div`
   font-weight: bold;
 `;
 
-export const Description = styled.p`
-  font-size: 16px;
-`;
-
 export const Footer = styled.div`
   width: fit-content;
   height: 5%;
@@ -39,8 +35,4 @@ export const Footer = styled.div`
 
 export const FooterData = styled.span`
   padding-right: 10px;
-`;
-
-export const CustomButton = styled.button`
-  width: 200px;
 `;

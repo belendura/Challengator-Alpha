@@ -7,7 +7,6 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectChallengeTemplatePreview } from "../../redux/challengesTemplates/challengesTemplates.selectors";
 
-//import { acceptChallenge } from "../../redux/challengesInstances/challengesInstances.actions";
 import {
   IncreaseLikesChallengeTemplateStart,
   IncreaseUnlikesChallengeTemplateStart
@@ -55,6 +54,9 @@ const ChallengeItem = () => {
   const { likesSum, likesUsers } = likes;
   const { unlikesSum, unlikesUsers } = unlikes;
 
+  const likeUserFound = likesUsers.some(item => item === currentUser.id);
+  const unlikeUserFound = unlikesUsers.some(item => item === currentUser.id);
+
   const handleIncreaseLikes = () => {
     if (!currentUser) {
       history.push("/signIn");
@@ -90,16 +92,21 @@ const ChallengeItem = () => {
         <Footer>
           <FooterData>{visualizations} visualitzations</FooterData>
           <FooterData>Difficulty: {difficulty} </FooterData>
-          <Like handleIncreaseLikes={handleIncreaseLikes} />
+          <Like
+            handleIncreaseLikes={handleIncreaseLikes}
+            likeUserFound={likeUserFound}
+          />
           <FooterData>{likesSum}</FooterData>
-          <Unlike handleIncreaseUnlikes={handleIncreaseUnlikes} />
+          <Unlike
+            handleIncreaseUnlikes={handleIncreaseUnlikes}
+            unlikeUserFound={unlikeUserFound}
+          />
           <FooterData>{unlikesSum} </FooterData>
         </Footer>
         <CustomButton
           onClick={() => {
             if (!currentUser) history.push("/signIn"); //!currentUser && history.push("/signIn")
-            // dispatch(acceptChallenge(challenge));
-            dispatch(openModal("CHALLENGE_CONTENDERS", challenge));
+            dispatch(openModal("CHALLENGE_CONTENDERS", { challenge }));
           }}
         >
           ACCEPT CHALLENGE

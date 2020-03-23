@@ -47,3 +47,22 @@ export const selectUsersOwnFriends = createSelector(
         }, [])
       : null
 );
+
+export const selectUsersByTemplateId = createSelector(
+  [selectUsersObj, (_, templateId) => templateId],
+  (users, templateId) =>
+    users && templateId
+      ? Object.entries(users).reduce((accumulator, item) => {
+          const [key, value] = item;
+          templateId.forEach(element => {
+            if (element.contenderId === key) {
+              return accumulator.push({
+                ...element,
+                name: value.userData.displayName
+              });
+            }
+          });
+          return accumulator;
+        }, [])
+      : null
+);

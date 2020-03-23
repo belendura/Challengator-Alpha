@@ -2,10 +2,10 @@ import React from "react";
 
 import { LikeContainer, LikeIconStyled } from "./like.styles";
 
-const Like = ({ handleIncreaseLikes }) => {
+const Like = ({ handleIncreaseLikes, likeUserFound }) => {
   return (
     <LikeContainer onClick={handleIncreaseLikes}>
-      <LikeIconStyled />
+      <LikeIconStyled likeUserFound={likeUserFound} />
     </LikeContainer>
   );
 };

@@ -7,8 +7,8 @@ import {
   firestore,
   convertChallengesSnapshotToMap,
   createChallengeTemplateDocument,
-  updateLikes,
-  updateUnlikes
+  updateLikesChallengeTemplates,
+  updateUnlikesChallengeTemplates
 } from "../../firebase/firebase.utils";
 
 import {
@@ -67,7 +67,6 @@ export function* storeChallengeAsync({
       })
     );
   } catch (error) {
-    console.log(error.message);
     yield put(storeChallengeTemplateFailure(error));
     yield put(openModal("ALERTS", { alertText: error }));
   }
@@ -97,15 +96,20 @@ export function* fetchChallengesAsync() {
 export function* onIncreaseLikesChallengeTemplateStart() {
   yield takeLatest(
     challengeTemplateActionTypes.INCREASE_LIKES_CHALLENGE_TEMPLATE_START,
-    updateChallengesLikeAsync
+    updateLikesChallengesAsync
   );
 }
 
-export function* updateChallengesLikeAsync({
+export function* updateLikesChallengesAsync({
   payload: { templateId, category, user }
 }) {
   try {
-    const newChallenges = yield call(updateLikes, templateId, category, user);
+    const newChallenges = yield call(
+      updateLikesChallengeTemplates,
+      templateId,
+      category,
+      user
+    );
     yield put(IncreaseLikesChallengeTemplateSuccess(newChallenges, category));
   } catch (error) {
     yield put(IncreaseLikesChallengeTemplateFailure(error.message));
@@ -115,15 +119,20 @@ export function* updateChallengesLikeAsync({
 export function* onIncreaseUnlikesChallengeTemplateStart() {
   yield takeLatest(
     challengeTemplateActionTypes.INCREASE_UNLIKES_CHALLENGE_TEMPLATE_START,
-    updateChallengesUnlikeAsync
+    updateUnlikesChallengesAsync
   );
 }
 
-export function* updateChallengesUnlikeAsync({
+export function* updateUnlikesChallengesAsync({
   payload: { templateId, category, user }
 }) {
   try {
-    const newChallenges = yield call(updateUnlikes, templateId, category, user);
+    const newChallenges = yield call(
+      updateUnlikesChallengeTemplates,
+      templateId,
+      category,
+      user
+    );
     yield put(IncreaseUnlikesChallengeTemplateSuccess(newChallenges, category));
   } catch (error) {
     yield put(IncreaseUnlikesChallengeTemplateFailure(error.message));

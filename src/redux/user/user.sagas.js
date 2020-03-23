@@ -4,7 +4,8 @@ import {
   auth,
   googleProvider,
   createUserProfileDocument,
-  getCurrentUser
+  getCurrentUser,
+  uploadUserPicture
 } from "../../firebase/firebase.utils";
 
 import {
@@ -85,15 +86,60 @@ export function* onSignOutStart() {
   yield takeLatest(userActionTypes.SIGN_OUT_START, signOut);
 }
 
+export function* onSignUpStart() {
+  yield takeLatest(userActionTypes.SIGN_UP_START, signUp);
+}
+
 export function* signUp({
-  payload: { displayName, age, gender, country, email, password }
+  payload: { userCredentials, dispatchedStorePictureStart }
 }) {
   try {
+    const {
+      displayName,
+      age,
+      gender,
+      country,
+      email,
+      password,
+      file,
+      fileObj
+    } = userCredentials;
+
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield call(
+      uploadUserPicture,
+      user,
+      userCredentials,
+      dispatchedStorePictureStart
+    );
+  } catch (error) {
+    yield put(signUpFailure(error));
+  }
+}
+
+export function* onStorePictureStart() {
+  yield takeLatest(userActionTypes.STORE_PICTURE_START, storePictureAsync);
+}
+
+export function* storePictureAsync({
+  payload: { user, userCredentials, downloadURL }
+}) {
+  const {
+    displayName,
+    age,
+    gender,
+    country,
+    email,
+    password,
+    file,
+    fileObj
+  } = userCredentials;
+
+  try {
     yield put(
       signUpSuccess({
         user,
-        additionalData: { displayName, age, gender, country }
+        additionalData: { displayName, age, gender, country, downloadURL }
       })
     );
   } catch (error) {
@@ -101,16 +147,12 @@ export function* signUp({
   }
 }
 
-export function* onSignUpStart() {
-  yield takeLatest(userActionTypes.SIGN_UP_START, signUp);
+export function* onSignUpSuccess() {
+  yield takeLatest(userActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
   yield getSnapShotFromUserAuth(user, additionalData);
-}
-
-export function* onSignUpSuccess() {
-  yield takeLatest(userActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* userSagas() {
@@ -120,6 +162,7 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),
-    call(onSignUpSuccess)
+    call(onSignUpSuccess),
+    call(onStorePictureStart)
   ]);
 }

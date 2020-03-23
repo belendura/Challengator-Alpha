@@ -21,17 +21,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const { displayName, email } = userAuth;
+    const { email } = userAuth;
+    const { displayName, age, gender, country, downloadURL } = additionalData;
     const createdAt = Date();
     try {
       await userRef.set({
-        userData: {
-          displayName,
-          email,
-          createdAt,
-          id: userAuth.uid,
-          ...additionalData
-        },
+        displayName,
+        age,
+        country,
+        gender,
+        photoUrl: downloadURL,
+        email: email,
+        createdAt: createdAt,
+        id: userAuth.uid,
+        providerId: "",
         challenges: {
           ability: [],
           heigth: [],
@@ -40,7 +43,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
           dancer: []
         },
         instancesToValidate: [],
-        statistics: { ranking: 0 },
+        statistics: { globalRanking: 0 },
         friends: { accepted: [], pending: [] },
         globalValidator: {
           status: "No validator",
@@ -76,8 +79,9 @@ export const createChallengeInstanceDocument = async (
     .collection(`challengesInstances`)
     .doc();
 
-  const callengeSnapShot = await challengeInstancesRef.get();
-  const challengeInstancesRefId = callengeSnapShot.id;
+  const challengeSnapShot = await challengeInstancesRef.get();
+
+  const challengeInstancesRefId = challengeSnapShot.id;
 
   try {
     contenders.forEach(async element => {
@@ -85,9 +89,22 @@ export const createChallengeInstanceDocument = async (
       const contendersSnapShot = await contendersRef.get();
 
       const challengeContenderData = contendersSnapShot.data();
-      const categoryChallenge =
-        challengeContenderData.challenges[`${category}`];
-      categoryChallenge.push(challengeInstancesRefId);
+
+      const currentChallenges = Object.entries(
+        challengeContenderData.challenges
+      ).reduce((accumulator, item) => {
+        const [key, value] = item;
+        if (key !== category) {
+          accumulator[key] = value;
+        }
+        if (key === category) {
+          value.push(challengeInstancesRefId);
+          accumulator[key] = value;
+        }
+        return accumulator;
+      }, {});
+
+      await contendersRef.update({ challenges: currentChallenges });
     });
   } catch (error) {
     console.log("Error adding challenge Id to contender", error.message);
@@ -99,8 +116,16 @@ export const createChallengeInstanceDocument = async (
       const validatorsSnapShot = await validatorsRef.get();
 
       const challengeValidatorData = validatorsSnapShot.data();
-      const instancesToValidate = challengeValidatorData.instancesToValidate;
-      instancesToValidate.push(challengeInstancesRefId);
+
+      const currentInstancesToValidate = Object.values(
+        challengeValidatorData.instancesToValidate
+      );
+
+      currentInstancesToValidate.push(challengeInstancesRefId);
+
+      await validatorsRef.update({
+        instancesToValidate: currentInstancesToValidate
+      });
     });
   } catch (error) {
     console.log("Error adding challenge Id to validator", error.message);
@@ -111,27 +136,60 @@ export const createChallengeInstanceDocument = async (
       ...accumulator,
       {
         contender: item,
+        expirationTask: "",
+        poster: "",
+        comments: [
+          {
+            text: "",
+            posterId: "",
+            dateOfPost: new Date(),
+            reportAbuse: false,
+            commentId: ""
+          }
+        ],
         status: "accepted",
         proof: {
           url: "",
-          uploadDate: "",
+          uploadDate: new Date(),
           state: "",
           validatedBy: { id: "", reported: false }
         },
-        expiresAt: ""
+        public: false,
+        rating: {
+          likes: { likesSum: 0, likesUsers: [] },
+          unlikes: { unlikesSum: 0, unlikesUsers: [] }
+        },
+        expiresAt: expirationDate(daysToComplete)
       }
     ]);
   }, []);
 
   const authorContender = {
-    contender: author.id,
+    contender: author,
+    expirationTask: "",
+    poster: "",
+    comments: [
+      {
+        text: "",
+        posterId: "",
+        dateOfPost: new Date(),
+        reportAbuse: false,
+        commentId: ""
+      }
+    ],
     status: "pending",
     proof: {
       url: "",
-      uploadDate: "",
+      uploadDate: new Date(),
       state: "",
       validatedBy: { id: "", reported: false }
     },
+    public: false,
+    rating: {
+      likes: { likesSum: 0, likesUsers: [] },
+      unlikes: { unlikesSum: 0, unlikesUsers: [] }
+    },
+
     expiresAt: expirationDate(daysToComplete)
   };
 
@@ -139,18 +197,16 @@ export const createChallengeInstanceDocument = async (
 
   try {
     await challengeInstancesRef.set({
+      instanceId: challengeInstancesRefId,
       templateId,
-      name: name,
-      administrator: author.id,
+      administrator: author,
       contenders: challengeContenders,
       validators: validators,
-      comments: [],
-      rating: { likes: 0, dislikes: 0, votes: [], pendingVotes: [] },
-      public: false,
       selfValidation: false
     });
   } catch (error) {
     console.log("Error creating challenge Instance", error.message);
+    throw new Error(`Error storing challengeInstance ${error.message}`);
   }
 };
 
@@ -176,17 +232,20 @@ export const createChallengeTemplateDocument = async (
     difficulty: "",
     minimumParticipants: 1,
     ranking: "",
-    rating: "",
-    likes: { likesSum: 0, likesUsers: [] },
-    unlikes: { unlikesSum: 0, unlikesUsers: [] },
+    rating: {
+      likes: { likesSum: 0, likesUsers: [] },
+      unlikes: { unlikesSum: 0, unlikesUsers: [] }
+    },
     visualizations: 0,
     timesShared: 0,
     approved: false,
-    author: author,
+    author: author.id,
     category: category,
     name: title,
     description,
-    url: downloadURL,
+    posterUrl: downloadURL,
+    posterUrl: "",
+    proofFileType: "",
     templateId
   };
 
@@ -438,6 +497,53 @@ export const uploadFile = async ({
   );
 };
 
+export const uploadUserPicture = async (
+  user,
+  userCredentials,
+  dispatchedStorePictureStart
+) => {
+  const { fileObj } = userCredentials;
+  console.log("fileObj in uplodUserPicture", fileObj);
+  var storageRef = firebase
+    .storage()
+    .ref("images/")
+    .child(fileObj.name);
+  var uploadTask = storageRef.put(fileObj);
+  const unsubscribe = uploadTask.on(
+    firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    function(snapshot) {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log("Upload is paused");
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log("Upload is running");
+          break;
+        default:
+          break;
+      }
+    },
+    function(error) {
+      // dispatchedOpenModal({ alertText: "Error uploading Picture" });
+      unsubscribe();
+    },
+    function() {
+      // Upload completed successfully, now we can get the download URL
+      uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+        dispatchedStorePictureStart(
+          user,
+          userCredentials,
+          downloadURL
+          // dispatchedOpenModal
+        );
+        unsubscribe();
+      });
+    }
+  );
+};
+
 const decreaseUnlikes = challengeTemplate => {
   return challengeTemplate.unlikes.unlikesSum > 0
     ? challengeTemplate.unlikes.unlikesSum - 1
@@ -450,7 +556,11 @@ const decreaseLikes = challengeTemplate => {
     : (challengeTemplate.likes.likesSum = 0);
 };
 
-export const updateLikes = async (templateId, category, user) => {
+export const updateLikesChallengeTemplates = async (
+  templateId,
+  category,
+  user
+) => {
   const challengeTemplatesCategoryRef = firestore.doc(
     `challengesTemplates/${category}`
   );
@@ -533,7 +643,11 @@ export const updateLikes = async (templateId, category, user) => {
   }
 };
 
-export const updateUnlikes = async (templateId, category, user) => {
+export const updateUnlikesChallengeTemplates = async (
+  templateId,
+  category,
+  user
+) => {
   const challengeTemplatesCategoryRef = firestore.doc(
     `challengesTemplates/${category}`
   );
@@ -611,6 +725,243 @@ export const updateUnlikes = async (templateId, category, user) => {
     });
 
     return { challenges: newChallenges };
+  } catch (error) {
+    console.log("Error increasing unlikes", error.message);
+  }
+};
+
+export const updateLikesChallengeInstances = async (
+  instanceId,
+  contender,
+  user
+) => {
+  const challengeInstanceRef = firestore.doc(
+    `challengesInstances/${instanceId}`
+  );
+
+  const snapShot = await challengeInstanceRef.get();
+
+  const challengeData = snapShot.data();
+
+  const challengeInstanceRating = challengeData.contenders.find(item => {
+    if (item.contender === contender) return item;
+  });
+
+  const likeFound = challengeInstanceRating.rating.likes.likesUsers.some(
+    userItem => {
+      return userItem === user.id;
+    }
+  );
+
+  const unLikeFound = challengeInstanceRating.rating.unlikes.unlikesUsers.some(
+    userItem => {
+      return userItem === user.id;
+    }
+  );
+
+  console.log("likeFound", likeFound);
+  console.log("unLikeFound", unLikeFound);
+  console.log("Likes");
+
+  let updatedContender = {};
+
+  const updatedLikeUsers = [...challengeInstanceRating.rating.likes.likesUsers];
+
+  if (!likeFound) {
+    updatedLikeUsers.push(user.id);
+
+    updatedContender = {
+      ...challengeInstanceRating,
+      rating: {
+        likes: {
+          likesUsers: updatedLikeUsers,
+          likesSum: challengeInstanceRating.rating.likes.likesSum + 1
+        },
+        unlikes: {
+          unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
+        }
+      }
+    };
+    if (unLikeFound) {
+      const updatedUnlikeUsers = challengeInstanceRating.rating.unlikes.unlikesUsers.filter(
+        userItem => {
+          return userItem !== user.id;
+        }
+      );
+
+      const updatedUnlikes = decreaseUnlikes(challengeInstanceRating.rating);
+
+      updatedContender = {
+        ...challengeInstanceRating,
+        rating: {
+          likes: {
+            likesUsers: challengeInstanceRating.rating.likes.likesUsers,
+            likesSum: challengeInstanceRating.rating.likes.likesSum
+          },
+          unlikes: {
+            unlikesUsers: updatedUnlikeUsers,
+            unlikesSum: updatedUnlikes
+          }
+        }
+      };
+    }
+  } else if (likeFound) {
+    const updatedLikes = decreaseLikes(challengeInstanceRating.rating);
+    const updatedLikeUsers = challengeInstanceRating.rating.likes.likesUsers.filter(
+      userItem => {
+        return userItem !== user.id;
+      }
+    );
+    updatedContender = {
+      ...challengeInstanceRating,
+      rating: {
+        likes: {
+          likesUsers: updatedLikeUsers,
+          likesSum: updatedLikes
+        },
+        unlikes: {
+          unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
+        }
+      }
+    };
+  }
+  const oldContenders = challengeData.contenders.filter(item => {
+    return item.contender !== contender;
+  });
+
+  try {
+    const newContenders = [...oldContenders, updatedContender];
+    console.log("oldContenders", oldContenders);
+    console.log("updatedContender", updatedContender);
+    await challengeInstanceRef.update({
+      contenders: newContenders
+    });
+
+    return { ...challengeData, contenders: newContenders };
+  } catch (error) {
+    console.log("Error increasing likes", error.message);
+  }
+};
+
+export const updateUnlikesChallengeInstances = async (
+  instanceId,
+  contender,
+  user
+) => {
+  const challengeInstanceRef = firestore.doc(
+    `challengesInstances/${instanceId}`
+  );
+
+  const snapShot = await challengeInstanceRef.get();
+
+  const challengeData = snapShot.data();
+
+  const challengeInstanceRating = challengeData.contenders.find(item => {
+    if (item.contender === contender) return item;
+  });
+
+  const likeFound = challengeInstanceRating.rating.likes.likesUsers.some(
+    userItem => {
+      return userItem === user.id;
+    }
+  );
+
+  const unLikeFound = challengeInstanceRating.rating.unlikes.unlikesUsers.some(
+    userItem => {
+      return userItem === user.id;
+    }
+  );
+
+  console.log("likeFound", likeFound);
+  console.log("unLikeFound", unLikeFound);
+  console.log("Unlikes");
+
+  let updatedContender = {};
+
+  const updatedUnlikeUsers = [
+    ...challengeInstanceRating.rating.unlikes.unlikesUsers
+  ];
+
+  if (!unLikeFound) {
+    updatedUnlikeUsers.push(user.id);
+    console.log("updatedUnlikeUsers", updatedUnlikeUsers);
+    console.log("challengeInstanceRating", challengeInstanceRating);
+    updatedContender = {
+      ...challengeInstanceRating,
+      rating: {
+        likes: {
+          likesUsers: challengeInstanceRating.rating.likes.likesUsers,
+          likesSum: challengeInstanceRating.rating.likes.likesSum
+        },
+        unlikes: {
+          unlikesUsers: updatedUnlikeUsers,
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum + 1
+        }
+      }
+    };
+    console.log("unlikes unlikes 1", challengeInstanceRating.rating.unlikes);
+    if (likeFound) {
+      const updatedLikeUsers = challengeInstanceRating.rating.likes.likesUsers.filter(
+        userItem => {
+          return userItem !== user.id;
+        }
+      );
+
+      const updatedLikes = decreaseLikes(challengeInstanceRating.rating);
+
+      updatedContender = {
+        ...challengeInstanceRating,
+        rating: {
+          likes: {
+            likesUsers: updatedLikeUsers,
+            likesSum: updatedLikes
+          },
+          unlikes: {
+            unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
+            unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
+          }
+        }
+      };
+    }
+    console.log("unlikes unlikes 2", challengeInstanceRating.rating.unlikes);
+  } else if (unLikeFound) {
+    const updatedUnlikes = decreaseUnlikes(challengeInstanceRating.rating);
+    const updatedUnlikeUsers = challengeInstanceRating.rating.unlikes.unlikesUsers.filter(
+      userItem => {
+        return userItem !== user.id;
+      }
+    );
+    updatedContender = {
+      ...challengeInstanceRating,
+      rating: {
+        likes: {
+          likesUsers: challengeInstanceRating.rating.likes.likesUsers,
+          likesSum: challengeInstanceRating.rating.likes.likesSum
+        },
+        unlikes: {
+          unlikesUsers: updatedUnlikeUsers,
+          unlikesSum: updatedUnlikes
+        }
+      }
+    };
+  }
+  const oldContenders = challengeData.contenders.filter(item => {
+    return item.contender !== contender;
+  });
+
+  try {
+    const newContenders = [...oldContenders, updatedContender];
+
+    console.log("oldContenders", oldContenders);
+    console.log("updatedContender", updatedContender);
+
+    await challengeInstanceRef.update({
+      contenders: newContenders
+    });
+
+    return { ...challengeData, contenders: newContenders };
   } catch (error) {
     console.log("Error increasing unlikes", error.message);
   }

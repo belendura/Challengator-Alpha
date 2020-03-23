@@ -8,7 +8,7 @@ export const UserInfoContainer = styled.div`
   align-items: center;
   //margin: 25px;
 `;
-export const UserPicturesContainer = styled.span`
+export const UserPicturesContainer = styled.img`
   height: 100%;
   width: 30px;
   padding: 25px;

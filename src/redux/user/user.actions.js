@@ -36,9 +36,9 @@ export const signOutFailure = error => ({
   payload: error
 });
 
-export const signUpStart = userCredentials => ({
+export const signUpStart = (userCredentials, dispatchedStorePictureStart) => ({
   type: userActionTypes.SIGN_UP_START,
-  payload: userCredentials
+  payload: { userCredentials, dispatchedStorePictureStart }
 });
 
 export const signUpSuccess = ({ user, additionalData }) => ({
@@ -48,5 +48,20 @@ export const signUpSuccess = ({ user, additionalData }) => ({
 
 export const signUpFailure = error => ({
   type: userActionTypes.SIGN_UP_FAILURE,
+  payload: error
+});
+
+export const storePictureStart = (user, userCredentials, downloadURL) => ({
+  type: userActionTypes.STORE_PICTURE_START,
+  payload: { user, userCredentials, downloadURL }
+});
+
+export const storePictureSuccess = userCredentials => ({
+  type: userActionTypes.STORE_PICTURE_SUCCESS,
+  payload: userCredentials
+});
+
+export const storePictureFailure = error => ({
+  type: userActionTypes.STORE_PICTURE_FAILURE,
   payload: error
 });

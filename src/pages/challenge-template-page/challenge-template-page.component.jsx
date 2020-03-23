@@ -16,7 +16,7 @@ const ChallengeTemplatePage = () => {
       <ChallengeTemplateContainer>
         <ChallengeItem />
       </ChallengeTemplateContainer>
-      <ChallengeRanking />
+      <ChallengeRanking params={params} />
     </ChallengeTemplatePageContainer>
   );
 };

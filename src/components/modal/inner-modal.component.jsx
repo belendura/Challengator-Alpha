@@ -18,11 +18,15 @@ const Alerts = React.lazy(() => import("../alerts/alerts.component"));
 const ChallengeContenders = React.lazy(() =>
   import("../challenge-contenders/challenge-contenders.component")
 );
+const ChallengeRankingDetails = React.lazy(() =>
+  import("../challenge-ranking-details/challenge-ranking-details.component")
+);
 
 const MODALS = {
   PROPOSE_CHALLENGE: ProposeChallenge,
   ALERTS: Alerts,
-  CHALLENGE_CONTENDERS: ChallengeContenders
+  CHALLENGE_CONTENDERS: ChallengeContenders,
+  CHALLENGE_RANKING: ChallengeRankingDetails
 };
 
 const InnerModal = () => {
