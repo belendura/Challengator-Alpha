@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useParams } from "react-router";
 
-//import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectChallengeInstanceId } from "../../redux/challengesInstances/challengesInstances.selectors";
+
 import {
   IncreaseLikesChallengeInstanceStart,
   IncreaseUnlikesChallengeInstanceStart
@@ -22,11 +24,25 @@ const ChallengeRankingDetails = ({
   instanceId,
   contenderId,
   name,
-  rating,
   url,
   currentUser
 }) => {
   const dispatch = useDispatch();
+
+  const selectedChallengeInstanceId = useSelector(
+    state => selectChallengeInstanceId(state, instanceId),
+    shallowEqual
+  );
+
+  const rating = selectedChallengeInstanceId.contenders.reduce(
+    (accumulator, item) => {
+      if (item.contender === contenderId);
+      return (accumulator = item.rating);
+    },
+    {}
+  );
+
+  console.log("rating", rating);
 
   const handleIncreaseLikes = () => {
     dispatch(
@@ -73,11 +89,13 @@ const ChallengeRankingDetails = ({
           <Like
             handleIncreaseLikes={handleIncreaseLikes}
             likeUserFound={currentUser ? { likeUserFound } : null}
+            currentUser={currentUser}
           />
           <FooterData>{rating.likes.likesSum}</FooterData>
           <Unlike
             handleIncreaseUnlikes={handleIncreaseUnlikes}
             unlikeUserFound={currentUser ? { unlikeUserFound } : null}
+            currentUser={currentUser}
           />
           <FooterData>{rating.unlikes.unlikesSum} </FooterData>
         </Footer>

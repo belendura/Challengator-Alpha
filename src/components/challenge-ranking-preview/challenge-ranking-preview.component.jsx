@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
@@ -21,8 +20,6 @@ const ChallengeRankingPreview = ({
 
   const currentUser = useSelector(selectCurrentUser, shallowEqual);
 
-  let history = useHistory();
-
   return (
     <ChallengeRankingPreviewContainer>
       <ChallengeRankingPreviewStyled>{name}</ChallengeRankingPreviewStyled>
@@ -35,20 +32,15 @@ const ChallengeRankingPreview = ({
       </ChallengeRankingPreviewStyled>
       <ChallengeRankingPreviewLink
         onClick={() => {
-          if (!currentUser) {
-            history.push("/signIn");
-          } else {
-            dispatch(
-              openModal("CHALLENGE_RANKING", {
-                instanceId,
-                contenderId,
-                name,
-                rating,
-                url,
-                currentUser
-              })
-            );
-          }
+          dispatch(
+            openModal("CHALLENGE_RANKING", {
+              instanceId,
+              contenderId,
+              name,
+              url,
+              currentUser
+            })
+          );
         }}
       >
         view

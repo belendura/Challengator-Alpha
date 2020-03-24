@@ -22,8 +22,6 @@ const ChallengeRanking = ({ params }) => {
     shallowEqual
   );
 
-  console.log("selectedUsersByTemplateId", selectedUsersByTemplateId);
-
   const orderArray = array => {
     for (let i = 0; i < array.length - 1; i++) {
       for (let j = i + 1; j < array.length; j++) {
@@ -32,7 +30,6 @@ const ChallengeRanking = ({ params }) => {
           array.splice(j, 1);
           array.splice(i, 0, number[0]);
         }
-        console.log("array i j", array);
       }
     }
     return array;
