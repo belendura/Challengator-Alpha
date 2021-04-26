@@ -44,4 +44,5 @@ export const SignIn = styled(Link)`
 
 export const UserInfoContainer = styled.div`
   width: 30%;
+  height: 100%;
 `;

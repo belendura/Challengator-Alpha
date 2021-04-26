@@ -21,20 +21,19 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const { email } = userAuth;
-    const { displayName, age, gender, country, downloadURL } = additionalData;
+    const { email, displayName, providerData } = userAuth;
+
+    const { age, gender, country, downloadURL } = additionalData;
+
     const createdAt = Date();
     try {
       await userRef.set({
         displayName,
-        age,
-        country,
-        gender,
         photoUrl: downloadURL,
         email: email,
         createdAt: createdAt,
         id: userAuth.uid,
-        providerId: "",
+        providerId: providerData[0].uid,
         challenges: {
           ability: [],
           heigth: [],
@@ -48,7 +47,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         globalValidator: {
           status: "No validator",
           instancesValidated: 0
-        }
+        },
+        age,
+        gender,
+        country
       });
     } catch (error) {
       console.log("Error creating user", error.message);

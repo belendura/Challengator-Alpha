@@ -17,9 +17,9 @@ const UserInfo = ({ currentUser }) => (
       />
     ) : null}
     <UserDataContainer>{currentUser.displayName}</UserDataContainer>
-    <UserDataContainer>
+    {/*}  <UserDataContainer>
       {currentUser.statistics.globalRanking}
-    </UserDataContainer>
+    </UserDataContainer>*/}
   </UserInfoContainer>
 );
 

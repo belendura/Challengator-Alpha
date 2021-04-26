@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { useParams } from "react-router";
 
 import { selectChallengeInstanceId } from "../../redux/challengesInstances/challengesInstances.selectors";
 
@@ -41,8 +40,6 @@ const ChallengeRankingDetails = ({
     },
     {}
   );
-
-  console.log("rating", rating);
 
   const handleIncreaseLikes = () => {
     dispatch(

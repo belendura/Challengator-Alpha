@@ -73,7 +73,6 @@ const SignUp = () => {
 
   return (
     <SignUpContainer>
-      {console.log("userCredentials", userCredentials)}
       <TitleContainer>I do not have an account</TitleContainer>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>

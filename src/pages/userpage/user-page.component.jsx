@@ -28,7 +28,16 @@ import UsersDropDown from "../../components/users-dropdown/users-dropdown.compon
 import Friends from "../../components/friends/friends.component";
 import AcceptedFriends from "../../components/accepted-friends/accepted-friends.component";
 
-import { UserPageContainer, UserPageItems } from "./user-page.styles.jsx";
+import userAvatarMale from "../../assets/users-1.svg";
+import userAvatarFemale from "../../assets/users-3.svg";
+import userAvatarOther from "../../assets/users-9.svg";
+
+import {
+  UserPageContainer,
+  UserDataContainer,
+  UserPictureContainer,
+  UserPageItems
+} from "./user-page.styles.jsx";
 
 const selectChallengeInstancesData = createStructuredSelector({
   isFetching: selectChallengesInstancesFetching,
@@ -78,11 +87,28 @@ const UserPage = () => {
     shallowEqual
   );
 
+  const userAvatar = "";
+
+  switch (userAvatar) {
+    case currentUser.userData.gender === "other":
+      userAvatar = userAvatarOther;
+      break;
+    case currentUser.userData.gender === "male":
+      userAvatar = userAvatarMale;
+      break;
+    case currentUser.userData.gender === "female":
+      userAvatar = userAvatarFemale;
+      break;
+
+    default:
+      break;
+  }
+
   useEffect(() => {
     if (usersIsFetching || !currentUser) {
       return;
     } else {
-      const filteredUsers = Object.entries(users).reduce(
+      /* const filteredUsers = Object.entries(users).reduce(
         (accumulator, userItem) => {
           const [id, data] = userItem;
           if (
@@ -102,7 +128,7 @@ const UserPage = () => {
         []
       );
 
-      setFilteredUsers(filteredUsers);
+      setFilteredUsers(filteredUsers);*/
     }
   }, [userSearch, users, currentUser, usersIsFetching]);
 
@@ -112,10 +138,19 @@ const UserPage = () => {
 
   return (
     <UserPageContainer>
+      <UserDataContainer>
+        <UserPictureContainer
+          src={currentUser.photoUrl ? currentUser.photoUrl : userAvatar}
+          alt="User Picture"
+          height="40"
+          width="30"
+        />
+      </UserDataContainer>
+
       <div>
         SEARCH FRIENDS
         <SearchBox placeHolder={placeHolder} handleChange={handleChange} />
-        <UsersDropDown filteredUsers={filteredUsers} />
+        {/* <UsersDropDown filteredUsers={filteredUsers} />*/}
       </div>
       <div>
         PENDING FRIENDS

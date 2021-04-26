@@ -1,0 +1,317 @@
+[debug] [2020-04-21T17:31:57.546Z] ----------------------------------------------------------------------
+[debug] [2020-04-21T17:31:57.551Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\belen\AppData\Local\Yarn\Data\global\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-04-21T17:31:57.552Z] CLI Version:   7.9.0
+[debug] [2020-04-21T17:31:57.552Z] Platform:      win32
+[debug] [2020-04-21T17:31:57.552Z] Node Version:  v12.13.0
+[debug] [2020-04-21T17:31:57.566Z] Time:          Tue Apr 21 2020 19:31:57 GMT+0200 (GMT+02:00)
+[debug] [2020-04-21T17:31:57.567Z] ----------------------------------------------------------------------
+[debug] [2020-04-21T17:31:57.567Z] 
+[debug] [2020-04-21T17:31:57.583Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-21T17:31:57.584Z] > authorizing via signed-in user
+[debug] [2020-04-21T17:31:57.585Z] [iam] checking project challengator-e3ef1 for permissions ["firebase.projects.get"]
+[debug] [2020-04-21T17:31:57.590Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/challengator-e3ef1:testIamPermissions  
+
+[debug] [2020-04-21T17:31:58.594Z] <<< HTTP RESPONSE 200
+[debug] [2020-04-21T17:31:58.596Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/challengator-e3ef1  
+ 
+[debug] [2020-04-21T17:31:58.916Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha'...
+[info] 
+[debug] [2020-04-21T17:31:58.926Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/challengator-e3ef1/webApps/-/config  
+ 
+[debug] [2020-04-21T17:31:59.628Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000
+[warn] !  Your requested "node" version "8" doesn't match your global version "12"
+[info] +  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions" for Cloud Functions...
+[debug] [2020-04-21T17:32:01.510Z] [worker-~diagnostic~-5fd341fc-f950-4596-9451-4fcb5a304d63]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15708
+[debug] [2020-04-21T17:32:01.511Z] [worker-~diagnostic~-5fd341fc-f950-4596-9451-4fcb5a304d63]: BUSY
+[debug] [2020-04-21T17:32:02.292Z] [runtime-status] [15708] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:32:02.293Z] [runtime-status] [15708] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:32:02.299Z] [runtime-status] [15708] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:32:02.306Z] [runtime-status] [15708] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:32:02.308Z] [runtime-status] [15708] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[info] +  functions[backendServer]: http function initialized (http://localhost:5001/challengator-e3ef1/europe-west3/backendServer).
+[debug] [2020-04-21T17:32:02.757Z] [worker-~diagnostic~-5fd341fc-f950-4596-9451-4fcb5a304d63]: exited
+[debug] [2020-04-21T17:32:02.758Z] [worker-~diagnostic~-5fd341fc-f950-4596-9451-4fcb5a304d63]: FINISHED
+[debug] [2020-04-21T17:36:17.726Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:36:18.750Z] [worker-~diagnostic~-89b2298d-61a4-4978-ac69-2a51750ac89e]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\6768
+[debug] [2020-04-21T17:36:18.750Z] [worker-~diagnostic~-89b2298d-61a4-4978-ac69-2a51750ac89e]: BUSY
+[debug] [2020-04-21T17:36:20.001Z] [runtime-status] [6768] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:36:20.004Z] [runtime-status] [6768] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:36:20.039Z] [runtime-status] [6768] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:36:20.046Z] [runtime-status] [6768] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:36:20.050Z] [runtime-status] [6768] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:36:20.556Z] [worker-~diagnostic~-89b2298d-61a4-4978-ac69-2a51750ac89e]: exited
+[debug] [2020-04-21T17:36:20.557Z] [worker-~diagnostic~-89b2298d-61a4-4978-ac69-2a51750ac89e]: FINISHED
+[debug] [2020-04-21T17:36:28.700Z] Accepted request GET /challengator-e3ef1/europe-west3/backendServer --> backendServer
+[debug] [2020-04-21T17:36:28.709Z] [worker-backendServer-cf56a20d-4814-4d60-b019-aaf8274419f4]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\13412
+[debug] [2020-04-21T17:36:28.709Z] [worker-backendServer-cf56a20d-4814-4d60-b019-aaf8274419f4]: BUSY
+[debug] [2020-04-21T17:36:29.263Z] [runtime-status] [13412] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:36:29.267Z] [runtime-status] [13412] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:36:29.272Z] [runtime-status] [13412] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:36:29.275Z] [runtime-status] [13412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:36:29.278Z] [runtime-status] [13412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:36:29.616Z] [runtime-status] [13412] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T17:36:29.618Z] [runtime-status] [13412] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T17:36:29.618Z] [runtime-status] [13412] Running backendServer in mode HTTPS
+[debug] [2020-04-21T17:36:29.629Z] [runtime-status] [13412] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\13412
+[debug] [2020-04-21T17:36:29.638Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T17:36:29.655Z] [runtime-status] [13412] Ephemeral server handling GET request
+[debug] [2020-04-21T17:36:29.659Z] [runtime-status] [13412] Ephemeral server survived.
+[debug] [2020-04-21T17:38:26.544Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:38:27.544Z] [worker-pool]: Marking BUSY worker to finish (backendServer)
+[debug] [2020-04-21T17:38:27.545Z] [worker-backendServer-cf56a20d-4814-4d60-b019-aaf8274419f4]: FINISHING
+[debug] [2020-04-21T17:38:27.555Z] [worker-~diagnostic~-9658c394-4b37-4463-956e-5765bc89eda5]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\9012
+[debug] [2020-04-21T17:38:27.555Z] [worker-~diagnostic~-9658c394-4b37-4463-956e-5765bc89eda5]: BUSY
+[debug] [2020-04-21T17:38:28.713Z] [runtime-status] [9012] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:38:28.714Z] [runtime-status] [9012] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:38:28.740Z] [runtime-status] [9012] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:38:28.751Z] [runtime-status] [9012] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:38:28.754Z] [runtime-status] [9012] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:38:29.485Z] [worker-~diagnostic~-9658c394-4b37-4463-956e-5765bc89eda5]: exited
+[debug] [2020-04-21T17:38:29.486Z] [worker-~diagnostic~-9658c394-4b37-4463-956e-5765bc89eda5]: FINISHED
+[debug] [2020-04-21T17:40:39.688Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:40:40.731Z] [worker-~diagnostic~-0cba186d-35bc-44fd-929f-2ebcf196f8c4]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\5024
+[debug] [2020-04-21T17:40:40.732Z] [worker-~diagnostic~-0cba186d-35bc-44fd-929f-2ebcf196f8c4]: BUSY
+[debug] [2020-04-21T17:40:49.456Z] [runtime-status] [5024] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:40:49.463Z] [runtime-status] [5024] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:40:49.493Z] [runtime-status] [5024] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:40:49.507Z] [runtime-status] [5024] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:40:49.511Z] [runtime-status] [5024] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:40:51.307Z] [worker-~diagnostic~-0cba186d-35bc-44fd-929f-2ebcf196f8c4]: exited
+[debug] [2020-04-21T17:40:51.307Z] [worker-~diagnostic~-0cba186d-35bc-44fd-929f-2ebcf196f8c4]: FINISHED
+[debug] [2020-04-21T17:40:58.506Z] Accepted request GET /challengator-e3ef1/europe-west3/backendServer --> backendServer
+[debug] [2020-04-21T17:40:58.525Z] [worker-backendServer-98f95907-8516-4890-a688-ecc487d1e4ad]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15556
+[debug] [2020-04-21T17:40:58.525Z] [worker-backendServer-98f95907-8516-4890-a688-ecc487d1e4ad]: BUSY
+[debug] [2020-04-21T17:41:00.432Z] [runtime-status] [15556] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:41:00.435Z] [runtime-status] [15556] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:41:00.444Z] [runtime-status] [15556] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:41:00.450Z] [runtime-status] [15556] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:41:00.452Z] [runtime-status] [15556] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:41:00.979Z] [runtime-status] [15556] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T17:41:01.000Z] [runtime-status] [15556] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T17:41:01.000Z] [runtime-status] [15556] Running backendServer in mode HTTPS
+[debug] [2020-04-21T17:41:01.001Z] [runtime-status] [15556] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15556
+[debug] [2020-04-21T17:41:01.012Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T17:41:01.068Z] [runtime-status] [15556] Ephemeral server handling GET request
+[debug] [2020-04-21T17:41:01.135Z] [runtime-status] [15556] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T17:41:01.139Z] [worker-backendServer-98f95907-8516-4890-a688-ecc487d1e4ad]: IDLE
+[debug] [2020-04-21T17:43:22.784Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:43:23.797Z] [worker-pool]: Shutting down IDLE worker (backendServer)
+[debug] [2020-04-21T17:43:23.925Z] [worker-~diagnostic~-bac4afcc-17f2-447b-9381-9320759ee10b]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\1604
+[debug] [2020-04-21T17:43:23.926Z] [worker-~diagnostic~-bac4afcc-17f2-447b-9381-9320759ee10b]: BUSY
+[debug] [2020-04-21T17:43:23.948Z] [worker-backendServer-98f95907-8516-4890-a688-ecc487d1e4ad]: exited
+[debug] [2020-04-21T17:43:23.948Z] [worker-backendServer-98f95907-8516-4890-a688-ecc487d1e4ad]: FINISHED
+[debug] [2020-04-21T17:43:27.885Z] [runtime-status] [1604] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:43:27.889Z] [runtime-status] [1604] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:43:27.916Z] [runtime-status] [1604] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:43:27.927Z] [runtime-status] [1604] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:43:27.929Z] [runtime-status] [1604] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:43:29.440Z] [worker-~diagnostic~-bac4afcc-17f2-447b-9381-9320759ee10b]: exited
+[debug] [2020-04-21T17:43:29.440Z] [worker-~diagnostic~-bac4afcc-17f2-447b-9381-9320759ee10b]: FINISHED
+[debug] [2020-04-21T17:43:30.884Z] Accepted request GET /challengator-e3ef1/europe-west3/backendServer --> backendServer
+[debug] [2020-04-21T17:43:30.911Z] [worker-backendServer-44041f54-932b-4a77-8d9c-8cdafe774b9a]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\3824
+[debug] [2020-04-21T17:43:30.911Z] [worker-backendServer-44041f54-932b-4a77-8d9c-8cdafe774b9a]: BUSY
+[debug] [2020-04-21T17:43:32.039Z] [runtime-status] [3824] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:43:32.041Z] [runtime-status] [3824] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:43:32.044Z] [runtime-status] [3824] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:43:32.049Z] [runtime-status] [3824] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:43:32.050Z] [runtime-status] [3824] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:43:32.621Z] [runtime-status] [3824] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T17:43:32.640Z] [runtime-status] [3824] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T17:43:32.641Z] [runtime-status] [3824] Running backendServer in mode HTTPS
+[debug] [2020-04-21T17:43:32.641Z] [runtime-status] [3824] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\3824
+[debug] [2020-04-21T17:43:32.650Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T17:43:32.707Z] [runtime-status] [3824] Ephemeral server handling GET request
+[debug] [2020-04-21T17:43:32.744Z] [runtime-status] [3824] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T17:43:32.758Z] [worker-backendServer-44041f54-932b-4a77-8d9c-8cdafe774b9a]: IDLE
+[debug] [2020-04-21T17:44:14.508Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:44:15.511Z] [worker-pool]: Shutting down IDLE worker (backendServer)
+[debug] [2020-04-21T17:44:15.525Z] [worker-~diagnostic~-0c07b836-4c52-4bdc-a3bc-fb20d5360245]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15476
+[debug] [2020-04-21T17:44:15.525Z] [worker-~diagnostic~-0c07b836-4c52-4bdc-a3bc-fb20d5360245]: BUSY
+[debug] [2020-04-21T17:44:15.526Z] [worker-backendServer-44041f54-932b-4a77-8d9c-8cdafe774b9a]: exited
+[debug] [2020-04-21T17:44:15.526Z] [worker-backendServer-44041f54-932b-4a77-8d9c-8cdafe774b9a]: FINISHED
+[debug] [2020-04-21T17:44:16.310Z] [runtime-status] [15476] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:44:16.315Z] [runtime-status] [15476] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:44:16.323Z] [runtime-status] [15476] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:44:16.333Z] [runtime-status] [15476] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:44:16.336Z] [runtime-status] [15476] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:44:17.104Z] [worker-~diagnostic~-0c07b836-4c52-4bdc-a3bc-fb20d5360245]: exited
+[debug] [2020-04-21T17:44:17.104Z] [worker-~diagnostic~-0c07b836-4c52-4bdc-a3bc-fb20d5360245]: FINISHED
+[debug] [2020-04-21T17:44:41.382Z] Accepted request GET /challengator-e3ef1/europe-west3/backendServer --> backendServer
+[debug] [2020-04-21T17:44:41.387Z] [worker-backendServer-56165605-0fb9-4a5b-a7ec-7fbb4d2caf19]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\10460
+[debug] [2020-04-21T17:44:41.387Z] [worker-backendServer-56165605-0fb9-4a5b-a7ec-7fbb4d2caf19]: BUSY
+[debug] [2020-04-21T17:44:41.995Z] [runtime-status] [10460] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:44:41.997Z] [runtime-status] [10460] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:44:42.003Z] [runtime-status] [10460] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:44:42.013Z] [runtime-status] [10460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:44:42.014Z] [runtime-status] [10460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:44:42.362Z] [runtime-status] [10460] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T17:44:42.364Z] [runtime-status] [10460] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T17:44:42.364Z] [runtime-status] [10460] Running backendServer in mode HTTPS
+[debug] [2020-04-21T17:44:42.370Z] [runtime-status] [10460] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\10460
+[debug] [2020-04-21T17:44:42.376Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T17:44:42.409Z] [runtime-status] [10460] Ephemeral server handling GET request
+[debug] [2020-04-21T17:44:42.452Z] [runtime-status] [10460] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T17:44:42.486Z] [worker-backendServer-56165605-0fb9-4a5b-a7ec-7fbb4d2caf19]: IDLE
+[debug] [2020-04-21T17:53:05.934Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:53:06.964Z] [worker-pool]: Shutting down IDLE worker (backendServer)
+[debug] [2020-04-21T17:53:07.070Z] [worker-~diagnostic~-64bb0b74-1d57-45c2-9a94-8b734373a875]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\10516
+[debug] [2020-04-21T17:53:07.072Z] [worker-~diagnostic~-64bb0b74-1d57-45c2-9a94-8b734373a875]: BUSY
+[debug] [2020-04-21T17:53:07.080Z] [worker-backendServer-56165605-0fb9-4a5b-a7ec-7fbb4d2caf19]: exited
+[debug] [2020-04-21T17:53:07.080Z] [worker-backendServer-56165605-0fb9-4a5b-a7ec-7fbb4d2caf19]: FINISHED
+[debug] [2020-04-21T17:53:08.244Z] [runtime-status] [10516] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:53:08.248Z] [runtime-status] [10516] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:53:08.272Z] [runtime-status] [10516] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:53:08.284Z] [runtime-status] [10516] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:53:08.286Z] [runtime-status] [10516] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:53:09.221Z] [worker-~diagnostic~-64bb0b74-1d57-45c2-9a94-8b734373a875]: exited
+[debug] [2020-04-21T17:53:09.222Z] [worker-~diagnostic~-64bb0b74-1d57-45c2-9a94-8b734373a875]: FINISHED
+[debug] [2020-04-21T17:54:50.686Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:54:51.695Z] [worker-~diagnostic~-85cf8a13-e0fc-4686-9f30-dc017d36d8fd]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\6344
+[debug] [2020-04-21T17:54:51.696Z] [worker-~diagnostic~-85cf8a13-e0fc-4686-9f30-dc017d36d8fd]: BUSY
+[debug] [2020-04-21T17:54:52.850Z] [runtime-status] [6344] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:54:52.852Z] [runtime-status] [6344] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:54:52.863Z] [runtime-status] [6344] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:54:52.865Z] [runtime-status] [6344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:54:52.867Z] [runtime-status] [6344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:54:53.340Z] [worker-~diagnostic~-85cf8a13-e0fc-4686-9f30-dc017d36d8fd]: exited
+[debug] [2020-04-21T17:54:53.340Z] [worker-~diagnostic~-85cf8a13-e0fc-4686-9f30-dc017d36d8fd]: FINISHED
+[debug] [2020-04-21T17:58:55.665Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T17:58:56.681Z] [worker-~diagnostic~-3dfaf2dd-a585-42e0-888f-34abd4c4af98]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\8996
+[debug] [2020-04-21T17:58:56.682Z] [worker-~diagnostic~-3dfaf2dd-a585-42e0-888f-34abd4c4af98]: BUSY
+[debug] [2020-04-21T17:58:58.533Z] [runtime-status] [8996] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T17:58:58.536Z] [runtime-status] [8996] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T17:58:58.542Z] [runtime-status] [8996] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T17:58:58.544Z] [runtime-status] [8996] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:58:58.545Z] [runtime-status] [8996] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T17:59:01.309Z] [worker-~diagnostic~-3dfaf2dd-a585-42e0-888f-34abd4c4af98]: exited
+[debug] [2020-04-21T17:59:01.309Z] [worker-~diagnostic~-3dfaf2dd-a585-42e0-888f-34abd4c4af98]: FINISHED
+[debug] [2020-04-21T18:08:26.581Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T18:08:27.594Z] [worker-~diagnostic~-644a8dac-57ea-4955-a0a2-db8095deb681]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\9560
+[debug] [2020-04-21T18:08:27.595Z] [worker-~diagnostic~-644a8dac-57ea-4955-a0a2-db8095deb681]: BUSY
+[debug] [2020-04-21T18:08:29.003Z] [runtime-status] [9560] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:08:29.007Z] [runtime-status] [9560] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:08:29.015Z] [runtime-status] [9560] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:08:29.026Z] [runtime-status] [9560] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:08:29.029Z] [runtime-status] [9560] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:08:30.322Z] [worker-~diagnostic~-644a8dac-57ea-4955-a0a2-db8095deb681]: exited
+[debug] [2020-04-21T18:08:30.322Z] [worker-~diagnostic~-644a8dac-57ea-4955-a0a2-db8095deb681]: FINISHED
+[debug] [2020-04-21T18:14:07.220Z] Accepted request POST /challengator-e3ef1/europe-west3/backendServer/user --> backendServer
+[debug] [2020-04-21T18:14:07.230Z] [worker-backendServer-cf564d96-20f7-41ed-ae08-50b2f32e732a]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\14440
+[debug] [2020-04-21T18:14:07.231Z] [worker-backendServer-cf564d96-20f7-41ed-ae08-50b2f32e732a]: BUSY
+[debug] [2020-04-21T18:14:07.931Z] [runtime-status] [14440] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:14:07.933Z] [runtime-status] [14440] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:14:07.943Z] [runtime-status] [14440] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:14:07.947Z] [runtime-status] [14440] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:14:07.950Z] [runtime-status] [14440] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:14:08.330Z] [runtime-status] [14440] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T18:14:08.356Z] [runtime-status] [14440] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T18:14:08.356Z] [runtime-status] [14440] Running backendServer in mode HTTPS
+[debug] [2020-04-21T18:14:08.357Z] [runtime-status] [14440] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\14440
+[debug] [2020-04-21T18:14:08.366Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T18:14:08.510Z] [runtime-status] [14440] Ephemeral server handling POST request
+[info] >  {name:Silo, wife:Angie}
+[debug] [2020-04-21T18:14:08.555Z] [runtime-status] [14440] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T18:14:08.680Z] [worker-backendServer-cf564d96-20f7-41ed-ae08-50b2f32e732a]: IDLE
+[debug] [2020-04-21T18:16:22.762Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T18:16:22.806Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T18:16:23.809Z] [worker-pool]: Shutting down IDLE worker (backendServer)
+[debug] [2020-04-21T18:16:23.881Z] [worker-~diagnostic~-374a6199-2f7b-4b36-a65e-ee310af8c972]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\16300
+[debug] [2020-04-21T18:16:23.882Z] [worker-~diagnostic~-374a6199-2f7b-4b36-a65e-ee310af8c972]: BUSY
+[debug] [2020-04-21T18:16:23.887Z] [worker-backendServer-cf564d96-20f7-41ed-ae08-50b2f32e732a]: exited
+[debug] [2020-04-21T18:16:23.888Z] [worker-backendServer-cf564d96-20f7-41ed-ae08-50b2f32e732a]: FINISHED
+[debug] [2020-04-21T18:16:24.960Z] [runtime-status] [16300] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:16:24.962Z] [runtime-status] [16300] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:16:24.981Z] [runtime-status] [16300] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:16:24.987Z] [runtime-status] [16300] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:24.991Z] [runtime-status] [16300] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:25.833Z] [worker-~diagnostic~-374a6199-2f7b-4b36-a65e-ee310af8c972]: exited
+[debug] [2020-04-21T18:16:25.833Z] [worker-~diagnostic~-374a6199-2f7b-4b36-a65e-ee310af8c972]: FINISHED
+[debug] [2020-04-21T18:16:32.899Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T18:16:33.914Z] [worker-~diagnostic~-01322f30-328b-4b08-bf9b-4aded2a27b92]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\1304
+[debug] [2020-04-21T18:16:33.915Z] [worker-~diagnostic~-01322f30-328b-4b08-bf9b-4aded2a27b92]: BUSY
+[debug] [2020-04-21T18:16:35.262Z] [runtime-status] [1304] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:16:35.264Z] [runtime-status] [1304] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:16:35.274Z] [runtime-status] [1304] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:16:35.278Z] [runtime-status] [1304] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:35.280Z] [runtime-status] [1304] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:35.720Z] [worker-~diagnostic~-01322f30-328b-4b08-bf9b-4aded2a27b92]: exited
+[debug] [2020-04-21T18:16:35.720Z] [worker-~diagnostic~-01322f30-328b-4b08-bf9b-4aded2a27b92]: FINISHED
+[debug] [2020-04-21T18:16:42.138Z] Accepted request POST /challengator-e3ef1/europe-west3/backendServer/user --> backendServer
+[debug] [2020-04-21T18:16:42.152Z] [worker-backendServer-cc2c8710-5b3a-422f-964d-2cd1fb431438]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\816
+[debug] [2020-04-21T18:16:42.152Z] [worker-backendServer-cc2c8710-5b3a-422f-964d-2cd1fb431438]: BUSY
+[debug] [2020-04-21T18:16:43.300Z] [runtime-status] [816] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:16:43.302Z] [runtime-status] [816] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:16:43.307Z] [runtime-status] [816] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:16:43.313Z] [runtime-status] [816] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:43.314Z] [runtime-status] [816] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:16:43.829Z] [runtime-status] [816] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T18:16:43.840Z] [runtime-status] [816] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T18:16:43.840Z] [runtime-status] [816] Running backendServer in mode HTTPS
+[debug] [2020-04-21T18:16:43.847Z] [runtime-status] [816] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\816
+[debug] [2020-04-21T18:16:43.864Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T18:16:44.002Z] [runtime-status] [816] Ephemeral server handling POST request
+[info] >  undefined
+[debug] [2020-04-21T18:16:44.035Z] [runtime-status] [816] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T18:16:44.133Z] [worker-backendServer-cc2c8710-5b3a-422f-964d-2cd1fb431438]: IDLE
+[debug] [2020-04-21T18:17:04.019Z] File C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\index.js changed, reloading triggers
+[debug] [2020-04-21T18:17:05.020Z] [worker-pool]: Shutting down IDLE worker (backendServer)
+[debug] [2020-04-21T18:17:05.033Z] [worker-~diagnostic~-77ad481f-684c-4f13-94f3-eec584d18edd]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15424
+[debug] [2020-04-21T18:17:05.033Z] [worker-~diagnostic~-77ad481f-684c-4f13-94f3-eec584d18edd]: BUSY
+[debug] [2020-04-21T18:17:05.057Z] [worker-backendServer-cc2c8710-5b3a-422f-964d-2cd1fb431438]: exited
+[debug] [2020-04-21T18:17:05.057Z] [worker-backendServer-cc2c8710-5b3a-422f-964d-2cd1fb431438]: FINISHED
+[debug] [2020-04-21T18:17:06.821Z] [runtime-status] [15424] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:17:06.826Z] [runtime-status] [15424] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:17:06.835Z] [runtime-status] [15424] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:17:06.846Z] [runtime-status] [15424] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:17:06.850Z] [runtime-status] [15424] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:17:07.306Z] [worker-~diagnostic~-77ad481f-684c-4f13-94f3-eec584d18edd]: exited
+[debug] [2020-04-21T18:17:07.306Z] [worker-~diagnostic~-77ad481f-684c-4f13-94f3-eec584d18edd]: FINISHED
+[debug] [2020-04-21T18:17:09.149Z] Accepted request POST /challengator-e3ef1/europe-west3/backendServer/user --> backendServer
+[debug] [2020-04-21T18:17:09.154Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15108
+[debug] [2020-04-21T18:17:09.155Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: BUSY
+[debug] [2020-04-21T18:17:09.702Z] [runtime-status] [15108] Functions runtime initialized. {"cwd":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions","node_version":"12.13.0"}
+[debug] [2020-04-21T18:17:09.706Z] [runtime-status] [15108] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-04-21T18:17:09.711Z] [runtime-status] [15108] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-04-21T18:17:09.716Z] [runtime-status] [15108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:17:09.736Z] [runtime-status] [15108] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.0","resolution":"C:\\Users\\belen\\Documents\\REACT_Projects\\Challengator\\challengator-alpha\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-04-21T18:17:10.031Z] [runtime-status] [15108] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T18:17:10.035Z] [runtime-status] [15108] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T18:17:10.035Z] [runtime-status] [15108] Running backendServer in mode HTTPS
+[debug] [2020-04-21T18:17:10.044Z] [runtime-status] [15108] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15108
+[debug] [2020-04-21T18:17:10.050Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T18:17:10.157Z] [runtime-status] [15108] Ephemeral server handling POST request
+[info] >  undefined
+[debug] [2020-04-21T18:17:10.173Z] [runtime-status] [15108] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T18:17:10.195Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: IDLE
+[debug] [2020-04-21T18:20:19.827Z] Accepted request POST /challengator-e3ef1/europe-west3/backendServer/user --> backendServer
+[debug] [2020-04-21T18:20:19.828Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: Assigning socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15108
+[debug] [2020-04-21T18:20:19.828Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: BUSY
+[debug] [2020-04-21T18:20:19.829Z] [runtime-status] [15108] Trigger "backendServer" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "backendServer"
+[debug] [2020-04-21T18:20:19.831Z] [runtime-status] [15108] triggerDefinition {"regions":["europe-west3"],"httpsTrigger":{},"name":"backendServer","entryPoint":"backendServer"}
+[debug] [2020-04-21T18:20:19.832Z] [runtime-status] [15108] Running backendServer in mode HTTPS
+[debug] [2020-04-21T18:20:19.832Z] [runtime-status] [15108] Attempting to listen to socketPath: \\?\pipe\C:\Users\belen\Documents\REACT_Projects\Challengator\challengator-alpha\functions\15108
+[debug] [2020-04-21T18:20:19.833Z] [functions] Runtime ready! Sending request!
+[debug] [2020-04-21T18:20:19.837Z] [runtime-status] [15108] Ephemeral server handling POST request
+[info] >  Silo
+[debug] [2020-04-21T18:20:19.861Z] [runtime-status] [15108] Ephemeral server survived.
+[info] i  functions: Finished "backendServer" in ~1s
+[debug] [2020-04-21T18:20:19.862Z] [worker-backendServer-250bce3a-9ff3-4561-8bf8-4df9bbb9398a]: IDLE

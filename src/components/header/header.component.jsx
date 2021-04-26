@@ -24,7 +24,6 @@ const Header = () => {
   const currentUser = useSelector(selectCurrentUser, shallowEqual);
 
   const dispatch = useDispatch();
-
   return (
     <HeaderContainer>
       <Link to="/">
