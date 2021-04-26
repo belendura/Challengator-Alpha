@@ -4,13 +4,13 @@ import "firebase/auth";
 import "firebase/storage";
 
 const config = {
-  apiKey: "AIzaSyDcLfGxwdtinaA7VnOCKjFaJECXsA_kPtU",
-  authDomain: "challengator-e3ef1.firebaseapp.com",
-  databaseURL: "https://challengator-e3ef1.firebaseio.com",
-  projectId: "challengator-e3ef1",
-  storageBucket: "challengator-e3ef1.appspot.com",
-  messagingSenderId: "266986901312",
-  appId: "1:266986901312:web:803fa34e25f79ece23f4a5"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -39,18 +39,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
           heigth: [],
           foodie: [],
           travel: [],
-          dancer: []
+          dancer: [],
         },
         instancesToValidate: [],
         statistics: { globalRanking: 0 },
         friends: { accepted: [], pending: [] },
         globalValidator: {
           status: "No validator",
-          instancesValidated: 0
+          instancesValidated: 0,
         },
         age,
         gender,
-        country
+        country,
       });
     } catch (error) {
       console.log("Error creating user", error.message);
@@ -59,7 +59,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-const expirationDate = daysToComplete => {
+const expirationDate = (daysToComplete) => {
   const date = new Date();
   return date.setDate(date.getDate() + daysToComplete);
 };
@@ -69,13 +69,7 @@ export const createChallengeInstanceDocument = async (
   contenders,
   validators
 ) => {
-  const {
-    templateId,
-    name,
-    author,
-    daysToComplete,
-    category
-  } = challengeInstance;
+  const { templateId, author, daysToComplete, category } = challengeInstance;
 
   const challengeInstancesRef = firestore
     .collection(`challengesInstances`)
@@ -86,7 +80,7 @@ export const createChallengeInstanceDocument = async (
   const challengeInstancesRefId = challengeSnapShot.id;
 
   try {
-    contenders.forEach(async element => {
+    contenders.forEach(async (element) => {
       const contendersRef = firestore.doc(`users/${element}`);
       const contendersSnapShot = await contendersRef.get();
 
@@ -113,7 +107,7 @@ export const createChallengeInstanceDocument = async (
   }
 
   try {
-    validators.forEach(async element => {
+    validators.forEach(async (element) => {
       const validatorsRef = firestore.doc(`users/${element}`);
       const validatorsSnapShot = await validatorsRef.get();
 
@@ -126,7 +120,7 @@ export const createChallengeInstanceDocument = async (
       currentInstancesToValidate.push(challengeInstancesRefId);
 
       await validatorsRef.update({
-        instancesToValidate: currentInstancesToValidate
+        instancesToValidate: currentInstancesToValidate,
       });
     });
   } catch (error) {
@@ -146,23 +140,23 @@ export const createChallengeInstanceDocument = async (
             posterId: "",
             dateOfPost: new Date(),
             reportAbuse: false,
-            commentId: ""
-          }
+            commentId: "",
+          },
         ],
         status: "accepted",
         proof: {
           url: "",
           uploadDate: new Date(),
           state: "",
-          validatedBy: { id: "", reported: false }
+          validatedBy: { id: "", reported: false },
         },
         public: false,
         rating: {
           likes: { likesSum: 0, likesUsers: [] },
-          unlikes: { unlikesSum: 0, unlikesUsers: [] }
+          unlikes: { unlikesSum: 0, unlikesUsers: [] },
         },
-        expiresAt: expirationDate(daysToComplete)
-      }
+        expiresAt: expirationDate(daysToComplete),
+      },
     ]);
   }, []);
 
@@ -176,23 +170,23 @@ export const createChallengeInstanceDocument = async (
         posterId: "",
         dateOfPost: new Date(),
         reportAbuse: false,
-        commentId: ""
-      }
+        commentId: "",
+      },
     ],
     status: "pending",
     proof: {
       url: "",
       uploadDate: new Date(),
       state: "",
-      validatedBy: { id: "", reported: false }
+      validatedBy: { id: "", reported: false },
     },
     public: false,
     rating: {
       likes: { likesSum: 0, likesUsers: [] },
-      unlikes: { unlikesSum: 0, unlikesUsers: [] }
+      unlikes: { unlikesSum: 0, unlikesUsers: [] },
     },
 
-    expiresAt: expirationDate(daysToComplete)
+    expiresAt: expirationDate(daysToComplete),
   };
 
   const challengeContenders = [...newContenders, authorContender];
@@ -204,7 +198,7 @@ export const createChallengeInstanceDocument = async (
       administrator: author,
       contenders: challengeContenders,
       validators: validators,
-      selfValidation: false
+      selfValidation: false,
     });
   } catch (error) {
     console.log("Error creating challenge Instance", error.message);
@@ -236,7 +230,7 @@ export const createChallengeTemplateDocument = async (
     ranking: "",
     rating: {
       likes: { likesSum: 0, likesUsers: [] },
-      unlikes: { unlikesSum: 0, unlikesUsers: [] }
+      unlikes: { unlikesSum: 0, unlikesUsers: [] },
     },
     visualizations: 0,
     timesShared: 0,
@@ -246,16 +240,15 @@ export const createChallengeTemplateDocument = async (
     name: title,
     description,
     posterUrl: downloadURL,
-    posterUrl: "",
     proofFileType: "",
-    templateId
+    templateId,
   };
 
   const categoryChallengesUpdated = [...categoryChallenges, challengeToAdd];
 
   try {
     await challengeTemplatesRef.update({
-      challenges: categoryChallengesUpdated
+      challenges: categoryChallengesUpdated,
     });
   } catch (error) {
     console.log("Error storing challenge template", error.message);
@@ -270,7 +263,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach(element => {
+  objectsToAdd.forEach((element) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, element);
   });
@@ -287,7 +280,7 @@ export const addFriend = async (user, friend) => {
     const friends = data.friends;
     const pendingFriends = friends.pending;
     const acceptedFriends = friends.accepted;
-    const exists = pendingFriends.some(item => {
+    const exists = pendingFriends.some((item) => {
       return item === user;
     });
     if (exists) {
@@ -296,7 +289,7 @@ export const addFriend = async (user, friend) => {
       try {
         const newPendingFriends = [...pendingFriends, user];
         await friendRef.update({
-          friends: { accepted: acceptedFriends, pending: newPendingFriends }
+          friends: { accepted: acceptedFriends, pending: newPendingFriends },
         });
       } catch (error) {
         console.log("Error adding friend", error.message);
@@ -317,17 +310,17 @@ export const acceptFriend = async (user, friend) => {
     const friends = data.friends;
     const pendingFriends = friends.pending;
     const acceptedFriends = friends.accepted;
-    const newPendingFriends = pendingFriends.filter(item => {
+    const newPendingFriends = pendingFriends.filter((item) => {
       return item !== user;
     });
-    const friendExists = acceptedFriends.some(item => {
+    const friendExists = acceptedFriends.some((item) => {
       return item === user;
     });
     if (!friendExists) {
       const newAcceptedFriends = [...acceptedFriends, user];
       try {
         await friendRef.update({
-          friends: { accepted: newAcceptedFriends, pending: newPendingFriends }
+          friends: { accepted: newAcceptedFriends, pending: newPendingFriends },
         });
       } catch (error) {
         console.log("Error accepting friend", error.message);
@@ -340,17 +333,17 @@ export const acceptFriend = async (user, friend) => {
     const friends = data.friends;
     const pendingFriends = friends.pending;
     const acceptedFriends = friends.accepted;
-    const newPendingFriends = pendingFriends.filter(item => {
+    const newPendingFriends = pendingFriends.filter((item) => {
       return item !== friend;
     });
-    const friendExists = acceptedFriends.some(item => {
+    const friendExists = acceptedFriends.some((item) => {
       return item === friend;
     });
     if (!friendExists) {
       const newAcceptedFriends = [...acceptedFriends, friend];
       try {
         await userRef.update({
-          friends: { accepted: newAcceptedFriends, pending: newPendingFriends }
+          friends: { accepted: newAcceptedFriends, pending: newPendingFriends },
         });
       } catch (error) {
         console.log("Error accepting friend", error.message);
@@ -371,16 +364,16 @@ export const deleteFriend = async (user, friend) => {
     const friends = data.friends;
     const pendingFriends = friends.pending;
     const acceptedFriends = friends.accepted;
-    const friendExists = acceptedFriends.some(item => {
+    const friendExists = acceptedFriends.some((item) => {
       return item === user;
     });
     if (friendExists) {
-      const newAcceptedFriends = acceptedFriends.filter(item => {
+      const newAcceptedFriends = acceptedFriends.filter((item) => {
         return item !== user;
       });
       try {
         await friendRef.update({
-          friends: { accepted: newAcceptedFriends, pending: pendingFriends }
+          friends: { accepted: newAcceptedFriends, pending: pendingFriends },
         });
       } catch (error) {
         console.log("Error deleting friend", error.message);
@@ -393,16 +386,16 @@ export const deleteFriend = async (user, friend) => {
     const friends = data.friends;
     const pendingFriends = friends.pending;
     const acceptedFriends = friends.accepted;
-    const friendExists = acceptedFriends.some(item => {
+    const friendExists = acceptedFriends.some((item) => {
       return item === friend;
     });
     if (friendExists) {
-      const newAcceptedFriends = acceptedFriends.filter(item => {
+      const newAcceptedFriends = acceptedFriends.filter((item) => {
         return item !== friend;
       });
       try {
         await userRef.update({
-          friends: { accepted: newAcceptedFriends, pending: pendingFriends }
+          friends: { accepted: newAcceptedFriends, pending: pendingFriends },
         });
       } catch (error) {
         console.log("Error deleting friend", error.message);
@@ -411,7 +404,7 @@ export const deleteFriend = async (user, friend) => {
   }
 };
 
-export const convertUsersSnapshotToMap = collections => {
+export const convertUsersSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.reduce((accumulator, doc) => {
     accumulator[doc.id] = doc.data();
     return accumulator;
@@ -419,14 +412,14 @@ export const convertUsersSnapshotToMap = collections => {
   return transformedCollection;
 };
 
-export const convertChallengesSnapshotToMap = collections => {
+export const convertChallengesSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.reduce((accumulator, doc) => {
     const { challenges } = doc.data();
     accumulator[doc.id] = { challenges: [] };
-    challenges.forEach(item => {
+    challenges.forEach((item) => {
       accumulator[doc.id].challenges = [
         ...accumulator[doc.id].challenges,
-        { ...item }
+        { ...item },
       ];
     });
     return accumulator;
@@ -434,7 +427,7 @@ export const convertChallengesSnapshotToMap = collections => {
   return transformedCollection;
 };
 
-export const convertChallengesInstanceSnapshotToMap = collections => {
+export const convertChallengesInstanceSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.reduce((accumulator, doc) => {
     accumulator[doc.id] = doc.data();
     return accumulator;
@@ -444,7 +437,7 @@ export const convertChallengesInstanceSnapshotToMap = collections => {
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       unsubscribe();
       resolve(userAuth);
     }, reject);
@@ -455,17 +448,14 @@ export const uploadFile = async ({
   challengeCredentials,
   dispatchedStoreChallengeStart,
   challengesTemplatesId,
-  dispatchedOpenModal
+  dispatchedOpenModal,
 }) => {
   const { fileObj } = challengeCredentials;
-  var storageRef = firebase
-    .storage()
-    .ref("images/")
-    .child(fileObj.name);
+  var storageRef = firebase.storage().ref("images/").child(fileObj.name);
   var uploadTask = storageRef.put(fileObj);
   const unsubscribe = uploadTask.on(
     firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-    function(snapshot) {
+    function (snapshot) {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log("Upload is " + progress + "% done");
       switch (snapshot.state) {
@@ -479,14 +469,14 @@ export const uploadFile = async ({
           break;
       }
     },
-    function(error) {
+    function (error) {
       console.log("Error al subir el archivo", error);
       dispatchedOpenModal({ alertText: "Error uploading File" });
       unsubscribe();
     },
-    function() {
+    function () {
       // Upload completed successfully, now we can get the download URL
-      uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
         dispatchedStoreChallengeStart(
           challengeCredentials,
           downloadURL,
@@ -506,14 +496,11 @@ export const uploadUserPicture = async (
 ) => {
   const { fileObj } = userCredentials;
   console.log("fileObj in uplodUserPicture", fileObj);
-  var storageRef = firebase
-    .storage()
-    .ref("images/")
-    .child(fileObj.name);
+  var storageRef = firebase.storage().ref("images/").child(fileObj.name);
   var uploadTask = storageRef.put(fileObj);
   const unsubscribe = uploadTask.on(
     firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-    function(snapshot) {
+    function (snapshot) {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log("Upload is " + progress + "% done");
       switch (snapshot.state) {
@@ -527,13 +514,13 @@ export const uploadUserPicture = async (
           break;
       }
     },
-    function(error) {
+    function (error) {
       // dispatchedOpenModal({ alertText: "Error uploading Picture" });
       unsubscribe();
     },
-    function() {
+    function () {
       // Upload completed successfully, now we can get the download URL
-      uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
         dispatchedStorePictureStart(
           user,
           userCredentials,
@@ -546,13 +533,13 @@ export const uploadUserPicture = async (
   );
 };
 
-const decreaseUnlikes = challengeTemplate => {
+const decreaseUnlikes = (challengeTemplate) => {
   return challengeTemplate.unlikes.unlikesSum > 0
     ? challengeTemplate.unlikes.unlikesSum - 1
     : (challengeTemplate.unlikes.unlikesSum = 0);
 };
 
-const decreaseLikes = challengeTemplate => {
+const decreaseLikes = (challengeTemplate) => {
   return challengeTemplate.likes.likesSum > 0
     ? challengeTemplate.likes.likesSum - 1
     : (challengeTemplate.likes.likesSum = 0);
@@ -571,17 +558,19 @@ export const updateLikesChallengeTemplates = async (
 
   const challengeData = snapShot.data();
 
-  const challengeTemplate = challengeData.challenges.find(item => {
+  const challengeTemplate = challengeData.challenges.find((item) => {
     return item.templateId === templateId;
   });
 
-  const likeFound = challengeTemplate.likes.likesUsers.some(userItem => {
+  const likeFound = challengeTemplate.likes.likesUsers.some((userItem) => {
     return userItem === user.id;
   });
 
-  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(userItem => {
-    return userItem === user.id;
-  });
+  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(
+    (userItem) => {
+      return userItem === user.id;
+    }
+  );
 
   let updatedChallenge = {};
 
@@ -594,12 +583,12 @@ export const updateLikesChallengeTemplates = async (
       ...challengeTemplate,
       likes: {
         likesUsers: updatedLikeUsers,
-        likesSum: challengeTemplate.likes.likesSum + 1
-      }
+        likesSum: challengeTemplate.likes.likesSum + 1,
+      },
     };
     if (unLikeFound) {
       const updatedUnlikeUsers = challengeTemplate.unlikes.unlikesUsers.filter(
-        userItem => {
+        (userItem) => {
           return userItem !== user.id;
         }
       );
@@ -609,14 +598,14 @@ export const updateLikesChallengeTemplates = async (
         ...updatedChallenge,
         unlikes: {
           unlikesUsers: updatedUnlikeUsers,
-          unlikesSum: updatedUnlikes
-        }
+          unlikesSum: updatedUnlikes,
+        },
       };
     }
   } else if (likeFound) {
     const updatedLikes = decreaseLikes(challengeTemplate);
     const updatedLikeUsers = challengeTemplate.likes.likesUsers.filter(
-      userItem => {
+      (userItem) => {
         return userItem !== user.id;
       }
     );
@@ -624,11 +613,11 @@ export const updateLikesChallengeTemplates = async (
       ...challengeTemplate,
       likes: {
         likesUsers: updatedLikeUsers,
-        likesSum: updatedLikes
-      }
+        likesSum: updatedLikes,
+      },
     };
   }
-  const oldChallenges = challengeData.challenges.filter(item => {
+  const oldChallenges = challengeData.challenges.filter((item) => {
     return item.templateId !== templateId;
   });
 
@@ -636,7 +625,7 @@ export const updateLikesChallengeTemplates = async (
     const newChallenges = [...oldChallenges, updatedChallenge];
 
     await challengeTemplatesCategoryRef.update({
-      challenges: newChallenges
+      challenges: newChallenges,
     });
 
     return { challenges: newChallenges };
@@ -658,17 +647,19 @@ export const updateUnlikesChallengeTemplates = async (
 
   const challengeData = snapShot.data();
 
-  const challengeTemplate = challengeData.challenges.find(item => {
+  const challengeTemplate = challengeData.challenges.find((item) => {
     return item.templateId === templateId;
   });
 
-  const likeFound = challengeTemplate.likes.likesUsers.some(userItem => {
+  const likeFound = challengeTemplate.likes.likesUsers.some((userItem) => {
     return userItem === user.id;
   });
 
-  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(userItem => {
-    return userItem === user.id;
-  });
+  const unLikeFound = challengeTemplate.unlikes.unlikesUsers.some(
+    (userItem) => {
+      return userItem === user.id;
+    }
+  );
 
   let updatedChallenge = {};
   const updatedUnlikeUsers = [...challengeTemplate.unlikes.unlikesUsers];
@@ -679,12 +670,12 @@ export const updateUnlikesChallengeTemplates = async (
       ...challengeTemplate,
       unlikes: {
         unlikesUsers: updatedUnlikeUsers,
-        unlikesSum: challengeTemplate.unlikes.unlikesSum + 1
-      }
+        unlikesSum: challengeTemplate.unlikes.unlikesSum + 1,
+      },
     };
     if (likeFound) {
       const updatedLikeUsers = challengeTemplate.likes.likesUsers.filter(
-        userItem => {
+        (userItem) => {
           return userItem !== user.id;
         }
       );
@@ -694,14 +685,14 @@ export const updateUnlikesChallengeTemplates = async (
         ...updatedChallenge,
         likes: {
           likesUsers: updatedLikeUsers,
-          likesSum: updatedLikes
-        }
+          likesSum: updatedLikes,
+        },
       };
     }
   } else if (unLikeFound) {
     const updatedUnlikes = decreaseUnlikes(challengeTemplate);
     const updatedUnlikeUsers = challengeTemplate.unlikes.unlikesUsers.filter(
-      userItem => {
+      (userItem) => {
         return userItem !== user.id;
       }
     );
@@ -710,12 +701,12 @@ export const updateUnlikesChallengeTemplates = async (
       ...challengeTemplate,
       unlikes: {
         unlikesUsers: updatedUnlikeUsers,
-        unlikesSum: updatedUnlikes
-      }
+        unlikesSum: updatedUnlikes,
+      },
     };
   }
 
-  const oldChallenges = challengeData.challenges.filter(item => {
+  const oldChallenges = challengeData.challenges.filter((item) => {
     return item.templateId !== templateId;
   });
 
@@ -723,7 +714,7 @@ export const updateUnlikesChallengeTemplates = async (
     const newChallenges = [...oldChallenges, updatedChallenge];
 
     await challengeTemplatesCategoryRef.update({
-      challenges: newChallenges
+      challenges: newChallenges,
     });
 
     return { challenges: newChallenges };
@@ -745,18 +736,18 @@ export const updateLikesChallengeInstances = async (
 
   const challengeData = snapShot.data();
 
-  const challengeInstanceRating = challengeData.contenders.find(item => {
-    if (item.contender === contender) return item;
+  const challengeInstanceRating = challengeData.contenders.find((item) => {
+    return item.contender === contender ? item : null;
   });
 
   const likeFound = challengeInstanceRating.rating.likes.likesUsers.some(
-    userItem => {
+    (userItem) => {
       return userItem === user.id;
     }
   );
 
   const unLikeFound = challengeInstanceRating.rating.unlikes.unlikesUsers.some(
-    userItem => {
+    (userItem) => {
       return userItem === user.id;
     }
   );
@@ -777,17 +768,17 @@ export const updateLikesChallengeInstances = async (
       rating: {
         likes: {
           likesUsers: updatedLikeUsers,
-          likesSum: challengeInstanceRating.rating.likes.likesSum + 1
+          likesSum: challengeInstanceRating.rating.likes.likesSum + 1,
         },
         unlikes: {
           unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
-          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
-        }
-      }
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum,
+        },
+      },
     };
     if (unLikeFound) {
       const updatedUnlikeUsers = challengeInstanceRating.rating.unlikes.unlikesUsers.filter(
-        userItem => {
+        (userItem) => {
           return userItem !== user.id;
         }
       );
@@ -799,19 +790,19 @@ export const updateLikesChallengeInstances = async (
         rating: {
           likes: {
             likesUsers: challengeInstanceRating.rating.likes.likesUsers,
-            likesSum: challengeInstanceRating.rating.likes.likesSum
+            likesSum: challengeInstanceRating.rating.likes.likesSum,
           },
           unlikes: {
             unlikesUsers: updatedUnlikeUsers,
-            unlikesSum: updatedUnlikes
-          }
-        }
+            unlikesSum: updatedUnlikes,
+          },
+        },
       };
     }
   } else if (likeFound) {
     const updatedLikes = decreaseLikes(challengeInstanceRating.rating);
     const updatedLikeUsers = challengeInstanceRating.rating.likes.likesUsers.filter(
-      userItem => {
+      (userItem) => {
         return userItem !== user.id;
       }
     );
@@ -820,16 +811,16 @@ export const updateLikesChallengeInstances = async (
       rating: {
         likes: {
           likesUsers: updatedLikeUsers,
-          likesSum: updatedLikes
+          likesSum: updatedLikes,
         },
         unlikes: {
           unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
-          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
-        }
-      }
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum,
+        },
+      },
     };
   }
-  const oldContenders = challengeData.contenders.filter(item => {
+  const oldContenders = challengeData.contenders.filter((item) => {
     return item.contender !== contender;
   });
 
@@ -838,7 +829,7 @@ export const updateLikesChallengeInstances = async (
     console.log("oldContenders", oldContenders);
     console.log("updatedContender", updatedContender);
     await challengeInstanceRef.update({
-      contenders: newContenders
+      contenders: newContenders,
     });
 
     return { ...challengeData, contenders: newContenders };
@@ -860,18 +851,18 @@ export const updateUnlikesChallengeInstances = async (
 
   const challengeData = snapShot.data();
 
-  const challengeInstanceRating = challengeData.contenders.find(item => {
-    if (item.contender === contender) return item;
+  const challengeInstanceRating = challengeData.contenders.find((item) => {
+    return item.contender === contender ? item : null;
   });
 
   const likeFound = challengeInstanceRating.rating.likes.likesUsers.some(
-    userItem => {
+    (userItem) => {
       return userItem === user.id;
     }
   );
 
   const unLikeFound = challengeInstanceRating.rating.unlikes.unlikesUsers.some(
-    userItem => {
+    (userItem) => {
       return userItem === user.id;
     }
   );
@@ -883,7 +874,7 @@ export const updateUnlikesChallengeInstances = async (
   let updatedContender = {};
 
   const updatedUnlikeUsers = [
-    ...challengeInstanceRating.rating.unlikes.unlikesUsers
+    ...challengeInstanceRating.rating.unlikes.unlikesUsers,
   ];
 
   if (!unLikeFound) {
@@ -895,18 +886,18 @@ export const updateUnlikesChallengeInstances = async (
       rating: {
         likes: {
           likesUsers: challengeInstanceRating.rating.likes.likesUsers,
-          likesSum: challengeInstanceRating.rating.likes.likesSum
+          likesSum: challengeInstanceRating.rating.likes.likesSum,
         },
         unlikes: {
           unlikesUsers: updatedUnlikeUsers,
-          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum + 1
-        }
-      }
+          unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum + 1,
+        },
+      },
     };
     console.log("unlikes unlikes 1", challengeInstanceRating.rating.unlikes);
     if (likeFound) {
       const updatedLikeUsers = challengeInstanceRating.rating.likes.likesUsers.filter(
-        userItem => {
+        (userItem) => {
           return userItem !== user.id;
         }
       );
@@ -918,20 +909,20 @@ export const updateUnlikesChallengeInstances = async (
         rating: {
           likes: {
             likesUsers: updatedLikeUsers,
-            likesSum: updatedLikes
+            likesSum: updatedLikes,
           },
           unlikes: {
             unlikesUsers: challengeInstanceRating.rating.unlikes.unlikesUsers,
-            unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum
-          }
-        }
+            unlikesSum: challengeInstanceRating.rating.unlikes.unlikesSum,
+          },
+        },
       };
     }
     console.log("unlikes unlikes 2", challengeInstanceRating.rating.unlikes);
   } else if (unLikeFound) {
     const updatedUnlikes = decreaseUnlikes(challengeInstanceRating.rating);
     const updatedUnlikeUsers = challengeInstanceRating.rating.unlikes.unlikesUsers.filter(
-      userItem => {
+      (userItem) => {
         return userItem !== user.id;
       }
     );
@@ -940,16 +931,16 @@ export const updateUnlikesChallengeInstances = async (
       rating: {
         likes: {
           likesUsers: challengeInstanceRating.rating.likes.likesUsers,
-          likesSum: challengeInstanceRating.rating.likes.likesSum
+          likesSum: challengeInstanceRating.rating.likes.likesSum,
         },
         unlikes: {
           unlikesUsers: updatedUnlikeUsers,
-          unlikesSum: updatedUnlikes
-        }
-      }
+          unlikesSum: updatedUnlikes,
+        },
+      },
     };
   }
-  const oldContenders = challengeData.contenders.filter(item => {
+  const oldContenders = challengeData.contenders.filter((item) => {
     return item.contender !== contender;
   });
 
@@ -960,7 +951,7 @@ export const updateUnlikesChallengeInstances = async (
     console.log("updatedContender", updatedContender);
 
     await challengeInstanceRef.update({
-      contenders: newContenders
+      contenders: newContenders,
     });
 
     return { ...challengeData, contenders: newContenders };

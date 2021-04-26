@@ -1,7 +1,5 @@
 ## Website
 
-https://liblab-web.firebaseapp.com/
-
 ## Info
 
 Work in progress social App conceived to be a hub for the users to challenge themselfs and their friends against the most popular viral challenges on the internet. Users can register and access to a catalog of challenges distributed by categories, accept a challenge and send it to their friends to become challengees or validators. Challenges accepted can be turned into public so other users can check your progression and vote on them. Users can modify their data at the user page, check pending and completed challenges or view their and other users statistics...
